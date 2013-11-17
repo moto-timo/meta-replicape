@@ -9,12 +9,18 @@ any pair to connect one tty serial port based application to another. \
 There is a version using pseudo-terminal (UNIX 98 style). \
 "
 
+KERNELDIR = "${STAGING_KERNEL_DIR}"
+
 inherit module
+
+SRC_URI += " \
+    file://0002-Makefile-KERNELDIR.patch \
+"
 
 # Only build the module
 do_compile () {
-	cd module
-	module_do_compile
+    cd module
+    module_do_compile
 }
 
 # Kernel module packages MUST begin with 'kernel-module-', otherwise
