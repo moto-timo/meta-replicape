@@ -14,7 +14,7 @@ DEPENDS = "tty0tty-module"
 # Only build the userspace app
 do_compile () {
     cd pts
-    oe_make_do_compile
+    oe_runmake
 }
 
 do_install() {
