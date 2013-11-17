@@ -14,13 +14,18 @@ KERNELDIR = "${STAGING_KERNEL_DIR}"
 inherit module
 
 SRC_URI += " \
-    file://0002-Makefile-KERNELDIR.patch \
+    file://0001-Makefile-KERNELDIR.patch \
 "
 
 # Only build the module
 do_compile () {
     cd module
     module_do_compile
+}
+
+do_install () {
+    install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/tty0tty
+    install -m 0644 ${S}/module/tty0tty${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/tty0tty
 }
 
 # Kernel module packages MUST begin with 'kernel-module-', otherwise
