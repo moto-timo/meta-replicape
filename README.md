@@ -7,3 +7,7 @@ In the spirit of [oe](http://openembedded.org), whenever possible, recipes will 
 
 Includes:
   * pasm -- a [PRU](http://processors.wiki.ti.com/index.php/Programmable_Realtime_Unit_Subsystem) Assembler
+  * tty0tty -- a Linux null-modem emulator
+    * kernel module
+    * user application
+    * systemd service
