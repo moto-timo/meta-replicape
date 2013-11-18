@@ -1,0 +1,20 @@
+Index: tty0tty-1.2/tty0tty.sh
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ tty0tty-1.2/tty0tty.sh	2013-11-18 08:04:27.402914729 -0800
+@@ -0,0 +1,15 @@
++#!/bin/sh
++
++case $1 in 
++	start)
++		/usr/bin/tty0tty > /var/log/tty0tty.log 2>&1 &
++		echo "tty0tty started ok"
++		exit 0
++		;;
++	stop)
++		pkill -9 -f tty0tty
++		echo "Killed tty0tty"
++		;;
++	*)
++		echo "Usage: $0 {start|stop}"
++esac

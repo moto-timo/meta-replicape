@@ -1,0 +1,18 @@
+Index: tty0tty-1.2/tty0tty.service
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ tty0tty-1.2/tty0tty.service	2013-11-18 08:05:27.918913918 -0800
+@@ -0,0 +1,13 @@
++[Unit]
++Description=a virtual nullmodem connetion
++
++[Service]
++RemainAfterExit=yes
++Type=simple
++ExecStart=/etc/init.d/tty0tty.sh start
++ExecStop=/etc/init.d/tty0tty.sh stop
++Restart=always
++
++[Install]
++WantedBy=basic.target
++
