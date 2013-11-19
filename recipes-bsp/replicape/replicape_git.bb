@@ -6,6 +6,7 @@ Software features: \
 - Printer settings loaded from file (Version 0.4.2) \
 - Controllable via ethernet, USB, printer display. \
 "
+LICENSE="BSD"
 
 SRC_URI = "git://bitbucket.org/intelligentagent/replicape.git;protocol=https"
 
