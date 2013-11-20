@@ -8,9 +8,9 @@ DEPEND += "tty0tty"
 
 inherit systemd
 
-RPROVIDES_${PN} += "${PN}-systemd"
-RREPLACES_${PN} += "${PN}-systemd"
-RCONFLICTS_${PN} += "${PN}-systemd"
+RPROVIDES_${PN} += "${PN}"
+RREPLACES_${PN} += "${PN}"
+RCONFLICTS_${PN} += "${PN}"
 SYSTEMD_SERVICE_${PN} = "tty0tty.service"
 
 do_install_append () {
