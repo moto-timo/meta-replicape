@@ -1,0 +1,12 @@
+Index: pypruss/setup.py
+===================================================================
+--- pypruss.orig/setup.py	2013-11-16 10:28:29.698344945 -0800
++++ pypruss/setup.py	2013-11-20 08:22:45.819152155 -0800
+@@ -23,7 +23,6 @@
+         author_email='elias.bakken@gmail.com',
+         license='BSD',
+         url='http://hipstercirtuits.com',
+-        data_files=[('/usr/local/lib', ['pypruss/lib/libprussdrv.so'])],
+         ext_modules=[Extension('pypruss', 
+                             ['pypruss/pypruss.c'], 
+                             include_dirs=['pypruss/include', 
