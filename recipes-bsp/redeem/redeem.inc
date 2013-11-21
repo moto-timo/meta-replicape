@@ -10,7 +10,7 @@ Software features: \
 HOMEPAGE = "http://wiki.thing-printer.com/index.php?title=Redeem"
 SECTION = "devel"
 
-LICENSE = "CC BY-SA 2.0"
+LICENSE = "CC-BY-SA- 2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=31006e521276d40f3a14b96c9b1bcf73"
 
 SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;protocol=https"
