@@ -1,20 +1,12 @@
 SUMMARY = "Replicape is a 3D printer cape for BeagleBone"
-DESCRIPTION = "Software written in Python for maintainability and hackability. \
-\
-Software features: \
-- Accelleration with corner speed prediction. \
-- Printer settings loaded from file (Version 0.4.2) \
-- Controllable via ethernet, USB, printer display. \
-"
+DESCRIPTION = "Software written in Python for maintainability and hackability."
 HOMEPAGE = "http://wiki.replicape.com/index.php?title=Software"
 SECTION = "devel"
 
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://software/Replicape.py;beginline=3;endline=10;md5=31006e521276d40f3a14b96c9b1bcf73"
+LICENSE = "CC-BY-SA-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
-RELDATE ?= "13_11_12"
-SRC_URI = "http://distros.replicape.com/Replicape_rev_${PV}-${RELDATE}.tgz"
-SRC_URI[md5sum] = "d4babc15cc580bb8111115d28285a221"
-SRC_URI[sha256sum] = "439a6519dea92d8a93c8f98293e91ab8ece29c4ea2971841909083a33a913cb0"
+SRC_URI = "git://bitbucket.org/intelligentagent/replicape.git;protocol=https"
+SRCREV = "d4ace928883656a1917968b97dca09609a9da4f8"
 
-S = "${WORKDIR}/Replicape/"
+S = "${WORKDIR}/git"
