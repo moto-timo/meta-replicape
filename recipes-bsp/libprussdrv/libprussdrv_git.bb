@@ -10,8 +10,14 @@ SRCREV = "dbd22a045e48032fffaae72f88d27e8f84c1239b"
 
 S = "${WORKDIR}/git/pru_sw/app_loader/interface"
 
+COMPATIBLE_MACHINE = "(beaglebone)"
+
 CFLAGS += "-I. -Wall -I../include   -c -fPIC -O3 -mtune=cortex-a8 -march=armv7-a -shared"
 SOURCES = "prussdrv.c"
+
+FILES_${PV} += " \
+            /usr/lib/libprussdrv.so \
+"
 
 do_compile () {
     ${CC} ${CFLAGS} ${SOURCES} -o prussdrv.o

@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 SRC_URI = "git://bitbucket.org/intelligentagent/replicape.git;protocol=https"
 SRCREV = "d4ace928883656a1917968b97dca09609a9da4f8"
 
+COMPATIBLE_MACHINE = "(beaglebone)"
+
 S = "${WORKDIR}/git"
 
 FILES_${PN} = " \
@@ -22,6 +24,8 @@ FILES_${PN} = " \
     /lib/firmware/am335x-bone.dtb \
     /lib/firmware/am335x-boneblack.dtb \
 "
+
+RDEPENDS_${PV} = "libprussdrv"
 
 do_compile () {
     dtc -O dtb -o BB-BONE-REPLICAP-00A1.dtbo -b 0 -@ ${S}/Device_tree/BB-BONE-REPLICAP-00A1.dts

@@ -1,4 +1,5 @@
-require cloud9-gnome-image.bb
+#require cloud9-gnome-image.bb
+LICENSE = "MIT"
 
 # python-smbus include i2c-tools
 IMAGE_INSTALL += " \
@@ -11,5 +12,5 @@ IMAGE_INSTALL += " \
 # replicape
 # pypruss
 
-export IMAGE_BASENAME = "cloud9-thing-slic3r-image"
+export IMAGE_BASENAME = "cloud9-gnome-thing-slic3r-image"
 

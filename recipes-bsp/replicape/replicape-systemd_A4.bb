@@ -1,5 +1,7 @@
 include replicape.inc
 
+COMPATIBLE_MACHINE = "(beaglebone)"
+
 inherit systemd
 
 RPROVIDES_${PN} += "${PN}-systemd"
