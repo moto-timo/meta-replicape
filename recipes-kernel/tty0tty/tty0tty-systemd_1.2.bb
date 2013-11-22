@@ -20,3 +20,9 @@ do_install_append () {
     install -m 0644 ${S}/tty0tty.service ${D}${systemd_unitdir}/system
     #systemctl enable tty0tty.service
 }
+
+FILES_${PN} = " \
+            /etc \
+            /etc/init.d \
+            /etc/init.d/tty0tty.sh \
+"
