@@ -18,6 +18,10 @@ FILES_${PN} += " \
             /etc/init.d/replicape.sh \
 "
 
+do_compile () {
+  :
+}
+
 do_install_append () {
     install -d ${D}/etc/init.d/
     install -m 0755 ${S}/systemd/replicape.sh ${D}/etc/init.d/
