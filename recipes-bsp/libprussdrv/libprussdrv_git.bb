@@ -17,15 +17,18 @@ SOURCES = "prussdrv.c"
 
 do_compile () {
     ${CC} ${CFLAGS} ${SOURCES} -o prussdrv.o
-    ${CC} -shared -o libprussdrv.so prussdrv.o
+    ${CC} -shared -o libprussdrv.so.1.0.0 prussdrv.o
 }
 
 do_install() {
     install -d ${D}${libdir}
-    install -m 0755 ${S}/libprussdrv.so ${D}${libdir}
+    install -m 0755 ${S}/libprussdrv.so.1.0.0 ${D}${libdir}
+    ln -s libprussdrv.so.1.0.0 ${D}${libdir}/libprussdrv.so.1
+    ln -s libprussdrv.so.1.0.0 ${D}${libdir}/libprussdrv.so
 }
 
 FILES_${PN} = " \
                ${libdir} \
+               ${libdir}/libprussdrv.so.${PV} \
                ${libdir}/libprussdrv.so \
 "
