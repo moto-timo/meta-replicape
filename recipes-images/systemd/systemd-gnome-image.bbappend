@@ -7,8 +7,6 @@ IMAGE_INSTALL += " \
     redeem-firmware \
     redeem-libs \
     redeem-systemd \
-    replicape-devicetree \
-    replicape-eeprom \
     tty0tty-systemd \
 "
 # currently broken:
