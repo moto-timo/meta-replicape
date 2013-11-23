@@ -6,25 +6,24 @@ SRC_URI += " \
 "
 DEPEND += "tty0tty"
 
-inherit systemd update-rc.d
+inherit systemd
 
 RPROVIDES_${PN} += "${PN}"
 RREPLACES_${PN} += "${PN}"
 RCONFLICTS_${PN} += "${PN}"
 SYSTEMD_SERVICE_${PN} = "tty0tty.service"
 
-INITSCRIPT_NAME = "tty0tty.sh"
-INITSCRIPT_PARAMS = "default tbd tbd"
-
 do_install_append () {
-    install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${S}/tty0tty.sh ${D}${sysconfdir}/init.d/tty0tty.sh
+    
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/tty0tty.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system/tty0tty.d
+    install -m 0755 ${S}/tty0tty.sh ${D}${system_unitdir}/system/tty0tty.d/tty0tty.sh
+    sed -i 's:/etc/init.d/:${systemd_unitdir}/system/tty0tty.d/:g' ${D}${system_unitdir}/system/tty0tty.d/tty0tty.sh
     #systemctl enable tty0tty.service
 }
 
 FILES_${PN} = " \
             ${systemd_unitdir}/system/tty0tty.service \
-            ${sysconfdir}/init.d/tty0tty.sh  \
+            ${systemd_unitdir}/system/tty0tty.d/tty0tty.sh  \
 "
