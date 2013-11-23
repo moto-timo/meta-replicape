@@ -16,17 +16,9 @@ SYSTEMD_SERVICE_${PN} = "tty0tty.service"
 do_install_append () {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/tty0tty.service ${D}${systemd_unitdir}/system
-    install -d ${D}${systemd_unitdir}/system/tty0tty.d
-<<<<<<< HEAD
-    install -m 0755 ${S}/tty0tty.sh ${D}${systemd_unitdir}/system/tty0tty.d/tty0tty.sh
-    sed -i 's:/etc/init.d/:${systemd_unitdir}/system/tty0tty.d/:g' ${D}${systemd_unitdir}/system/tty0tty.d/tty0tty.sh
-=======
     sed -i 's:/etc/init.d/:${systemd_unitdir}/system/tty0tty.d/:g' ${D}${system_unitdir}/system/tty0tty.service
+    install -d ${D}${systemd_unitdir}/system/tty0tty.d
     install -m 0755 ${S}/tty0tty.sh ${D}${system_unitdir}/system/tty0tty.d/tty0tty.sh
->>>>>>> bd34e6cf50588d9e0d9c778ca465f4c473b7fd04
-    #systemctl enable tty0tty.service
-}
-
     #systemctl enable tty0tty.service
 }
 
