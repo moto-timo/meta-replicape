@@ -8,6 +8,7 @@ RDEPENDS_${PN} = " \
     pypruss \
     redeem-firmware \
     redeem-libs \
+    redeem-software \
     redeem-systemd \
     tty0tty \
     tty0tty-systemd \
