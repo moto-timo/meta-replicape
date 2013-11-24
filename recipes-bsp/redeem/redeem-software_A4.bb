@@ -5,6 +5,19 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
 S .= "/software"
 
+RDEPENDS_${PN} = " \
+	python-email \
+	python-smbus \
+	python-mmap \
+	python-profile \
+    python-spi \
+    pypruss \
+    redeem-firmware \
+    redeem-systemd \
+    tty0tty \
+    tty0tty-systemd \
+"
+
 inherit distutils
 
 export BUILD_SYS
