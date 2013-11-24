@@ -32,8 +32,6 @@ do_install_append () {
     install -d ${D}/opt/Replicape/software/config
     install -m 0644 ${S}/*.py ${D}/opt/Replicape/software
     install -m 0644 ${S}/*.c ${D}/opt/Replicape/software
-    install -m 0644 ${S}/*.pyx ${D}/opt/Replicape/software
-#    install -m 0755 ${S}/*.so ${D}/opt/Replicape/software
     install -m 0644 ${S}/config/*.cfg ${D}/opt/Replicape/software/config
 #    ln -s /opt/Replicape/software/config/Thing.cfg /opt/Replicape/software/config/default.cfg
 }
@@ -43,7 +41,6 @@ FILES_${PN} += " \
 	    /opt/Replicape \
 	    /opt/Replicape/software \
             /opt/Replicape/software/*.py \
-            /opt/Replicape/software/*.pyx \
             /opt/Replicape/software/*.c \
 	    /opt/Replicape/software/config \
             /opt/Replicape/software/config/*.cfg \
