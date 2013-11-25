@@ -4,8 +4,8 @@ IMAGE_INSTALL += " \
     pasm \
     pypruss \
     python-pyopengl \
+    python-spi \
     redeem-firmware \
-    redeem-libs \
     redeem-systemd \
     tty0tty-systemd \
 "
