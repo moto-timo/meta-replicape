@@ -14,7 +14,7 @@ LICENSE = "CC-BY-SA-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
 SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;branch=Rev-A4;protocol=https"
-SRCREV = "a8718a5e4bd748b7d5ecd98f898c4607e0e1a3d8"
+SRCREV = "2574eda305d3fe530c17c180d89f88c135b8457b"
 
 COMPATIBLE_MACHINE = "(beaglebone)"
 

@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " \
 	python-profile \
     python-spi \
     pypruss \
+	libprussdrv \
     redeem-firmware \
     redeem-systemd \
     tty0tty \
