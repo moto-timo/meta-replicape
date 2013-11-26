@@ -1,0 +1,17 @@
+Index: tty0tty-1.2/pts/tty0tty.c
+===================================================================
+--- tty0tty-1.2.orig/pts/tty0tty.c	2013-09-16 17:10:30.662942588 +0200
++++ tty0tty-1.2/pts/tty0tty.c	2013-11-26 03:00:50.386763774 +0100
+@@ -184,10 +184,10 @@ int main(int argc, char* argv[])
+       fprintf(stderr, "Cannot create: %s\n", argv[2]);
+       return 1;
+     }
+-    printf("(%s) <=> (%s)\n",argv[1],argv[2]);
++    fprintf(stderr, "(%s) <=> (%s)\n",argv[1],argv[2]);
+   }
+   else {
+-    printf("(%s) <=> (%s)\n",slave1,slave2);
++    fprintf(stderr, "(%s) <=> (%s)\n",slave1,slave2);
+   }
+   fflush(stdout);
+

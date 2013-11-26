@@ -8,8 +8,9 @@ serial port driver for Linux. This creates virtual tty port pairs and uses \
 any pair to connect one tty serial port based application to another. \
 There is a version using pseudo-terminal (UNIX 98 style). \
 "
-
-DEPENDS = "tty0tty-module"
+SRC_URI += " \
+    file://0004-use-fprint.patch \
+"
 
 # Only build the userspace app
 do_compile () {
@@ -22,5 +23,5 @@ do_install() {
     install -m 0755 ${S}/pts/tty0tty ${D}${bindir}/
 }
 
-RDEPENDS_${PN} = "kernel-module-tty0tty"
+
 

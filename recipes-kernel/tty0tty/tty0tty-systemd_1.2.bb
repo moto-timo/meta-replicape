@@ -19,7 +19,6 @@ do_install_append () {
     sed -i 's:/etc/init.d/:${systemd_unitdir}/system/tty0tty.d/:g' ${D}${systemd_unitdir}/system/tty0tty.service
     install -d ${D}${systemd_unitdir}/system/tty0tty.d
     install -m 0755 ${S}/tty0tty.sh ${D}${systemd_unitdir}/system/tty0tty.d/tty0tty.sh
-    #systemctl enable tty0tty.service
 }
 
 FILES_${PN} = " \
