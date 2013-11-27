@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 S .= "/software"
 
 RDEPENDS_${PN} = " \
-	python-email \
-	python-smbus \
-	python-mmap \
-	python-profile \
+    python-email \
+    python-smbus \
+    python-mmap \
+    python-profile \
     python-spi \
     pypruss \
-	libprussdrv \
+    libprussdrv \
     redeem-firmware \
     redeem-systemd \
     tty0tty \
@@ -27,22 +27,21 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 do_install_append () {
-    install -d ${D}/opt
-    install -d ${D}/opt/Replicape
-    install -d ${D}/opt/Replicape/software
-    install -d ${D}/opt/Replicape/software/config
-    install -m 0644 ${S}/*.py ${D}/opt/Replicape/software
-    install -m 0644 ${S}/*.c ${D}/opt/Replicape/software
-    install -m 0644 ${S}/config/*.cfg ${D}/opt/Replicape/software/config
-#    ln -s /opt/Replicape/software/config/Thing.cfg /opt/Replicape/software/config/default.cfg
+    install -d ${D}${bindir}
+    install -d ${D}${bindir}/Replicape
+    install -d ${D}${bindir}/Replicape/software
+    install -d ${D}${bindir}/Replicape/software/config
+    install -m 0644 ${S}/*.py ${D}${bindir}/Replicape/software
+    install -m 0644 ${S}/*.c ${D}${bindir}/Replicape/software
+    install -m 0644 ${S}/config/*.cfg ${D}${bindir}/Replicape/software/config
+#    ln -s ${bindir}/Replicape/software/config/Thing.cfg ${bindir}/Replicape/software/config/default.cfg
 }
 
 FILES_${PN} += " \
-	    /opt \
-	    /opt/Replicape \
-	    /opt/Replicape/software \
-            /opt/Replicape/software/*.py \
-            /opt/Replicape/software/*.c \
-	    /opt/Replicape/software/config \
-            /opt/Replicape/software/config/*.cfg \
+	    ${bindir}/Replicape \
+	    ${bindir}/Replicape/software \
+            ${bindir}/Replicape/software/*.py \
+            ${bindir}/Replicape/software/*.c \
+	    ${bindir}/Replicape/software/config \
+            ${bindir}/Replicape/software/config/*.cfg \
 "

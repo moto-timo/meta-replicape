@@ -10,11 +10,10 @@ DEPENDS = "pasm-native"
 FILENAME = "firmware_${PV}"
 
 FILES_${PN} += " \
-            /opt \
-            /opt/Replicape \
-            /opt/Replicape/firmware \
-            /opt/Replicape/firmware/${FILENAME}.bin \
-            /opt/Replicape/firmware/${FILENAME}.p \
+            ${bindir}/Replicape \
+            ${bindir}/Replicape/firmware \
+            ${bindir}/Replicape/firmware/${FILENAME}.bin \
+            ${bindir}/Replicape/firmware/${FILENAME}.p \
 "
 
 do_compile () {
@@ -22,7 +21,7 @@ do_compile () {
 }
 
 do_install () {
-    install -d ${D}/opt/Replicape/firmware
-    install -m 0644 ${S}/${FILENAME}.p ${D}/opt/Replicape/firmware
-    install -m 0644 ${S}/${FILENAME}.bin ${D}/opt/Replicape/firmware
+    install -d ${D}${bindir}/Replicape/firmware
+    install -m 0644 ${S}/${FILENAME}.p ${D}${bindir}/Replicape/firmware
+    install -m 0644 ${S}/${FILENAME}.bin ${D}${bindir}/Replicape/firmware
 }

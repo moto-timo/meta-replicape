@@ -16,18 +16,16 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 S = "${WORKDIR}/git"
 
 RDEPENDS_${PN} = " \
-	#wxpython \
 	python-pyserial \
 "
 
 do_install_append () {
-    install -d ${D}/opt
-    install -d ${D}/opt/toggle
-    install -m 0644 ${S}/*.py ${D}/opt/toggle
+    install -d ${D}${bindir}
+    install -d ${D}${bindir}/toggle
+    install -m 0644 ${S}/*.py ${D}${bindir}/toggle
 }
 
 FILES_${PN} += " \
-	    /opt \
-	    /opt/toggle \
-	    /opt/toggle/Toggle.py \
+	    ${bindir}/toggle \
+	    ${bindir}/toggle/Toggle.py \
 "
