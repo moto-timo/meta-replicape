@@ -1,14 +1,8 @@
-# python-smbus include i2c-tools
 IMAGE_INSTALL += " \
-    libprussdrv \
-    pasm \
-    pypruss \
-    python-pyopengl \
-    python-spi \
-    redeem-systemd \
-    redeem-firmware \
-    tty0tty-systemd \
+    redeem \
+    toggle \
 "
+BBMASK = "ltp-ddt_0.0.4.bb"
 
 # currently broken:
 # slic3r
