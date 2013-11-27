@@ -15,7 +15,13 @@ S = "${WORKDIR}/git"
 
 inherit distutils
 
-RDEPENDS_${PV} += "libprussdrv"
+RDEPENDS_${PN} += "libprussdrv"
+RRECOMMENDS_${PN} += "pasm"
+
+export BUILD_SYS
+export HOST_SYS
+export STAGING_INCDIR
+export STAGIN_LIBDIR
 
 do_compile () {
     sed -i -e "s:data_files=[('/usr/local/lib', ['pypruss/lib/libprussdrv.so'])],::g" setup.py
