@@ -1,0 +1,15 @@
+Index: git/setup.py
+===================================================================
+--- git.orig/setup.py	2013-11-28 06:11:17.341891080 -0800
++++ git/setup.py	2013-11-28 08:51:15.569648809 -0800
+@@ -27,8 +27,8 @@
+         ext_modules=[Extension('pypruss', 
+                             ['pypruss/pypruss.c'], 
+                             include_dirs=['pypruss/include', 
+-                                '/usr/include/python2.7',
+-                                '/usr/include'],
++                                '${STAGING_INCDIR}/${PYTHON_DIR}',
++                                '${STAGING_INCDIR}'],
+                             define_macros=[('__DEBUG', None)],
+                             library_dirs=['pypruss/lib'],
+                             libraries=['prussdrv', 'pthread'], 

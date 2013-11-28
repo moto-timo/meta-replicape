@@ -8,12 +8,13 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=22;endline=25;md5=855973260dd42ad0
 
 SRC_URI = "git://bitbucket.org/intelligentagent/pypruss.git;protocol=https \
            file://0001-Remove-libprussdrv.patch \
+           file://0002-fix-usr-include-paths.patch \
 "
 SRCREV = "ee6e8df92c242fbf91990466a119c9d949b12d8d"
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit distutils python-dir
 
 RDEPENDS_${PN} += "libprussdrv"
 RRECOMMENDS_${PN} += "pasm"
@@ -21,9 +22,5 @@ RRECOMMENDS_${PN} += "pasm"
 export BUILD_SYS
 export HOST_SYS
 export STAGING_INCDIR
-export STAGIN_LIBDIR
-
-do_compile () {
-    sed -i -e "s:data_files=[('/usr/local/lib', ['pypruss/lib/libprussdrv.so'])],::g" setup.py
-    distutils_do_compile
-}
+export STAGING_LIBDIR
+export PYTHON_DIR
