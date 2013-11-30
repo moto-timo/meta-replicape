@@ -1,0 +1,27 @@
+Index: src/setup.py
+===================================================================
+--- src.orig/setup.py	2010-01-09 03:22:12.000000000 -0800
++++ src/setup.py	2013-11-29 14:12:43.078979143 -0800
+@@ -2,6 +2,14 @@
+ 
+ from distutils.core import setup, Extension
+ 
++from distutils import sysconfig
++import re
++
++vars  = sysconfig.get_config_vars()
++for v in vars:
++	if str(vars[v]).find("--sysroot") > 0:
++		vars[v] =  re.sub("--sysroot=[^\s]+", " ", vars[v])
++
+ setup(	name="spi",
+ 	version="1.1",
+ 	description="Python bindings for Linux SPI access through spi-dev",
+@@ -11,6 +19,5 @@
+ 	maintainer_email="unconnected@gmx.de",
+ 	license="GPLv2",
+ 	url="http://www.hs-augsburg.de/~vthoms",
+-	include_dirs=["/usr/src/linux/include"],
+-	scripts=['scripts/93LC46_LAtest.py','scripts/93LC46_test2.py','scripts/93LC46_test.py','scripts/ds1305_test.py','scripts/mcp3304.py','scripts/mcp3304_test.py','scripts/mcp4922.py','scripts/spitest3.py'],
++	include_dirs=["${STAGING_INCDIR}"],
+ 	ext_modules=[Extension("spi", ["spimodule.c"])])
