@@ -1,6 +1,6 @@
 SUMMARY = "3D-printer front end for embedded devices."
 
-DESCRIPTION = "Toggle is a 3D-printer front end for use with embedded devices. It's a perfect fit for the BeagleBone Black/Replicape/Manga Screen combo."
+DESCRIPTION = "Toggle is a 3D-printer front end for use with embedded devices."
 
 HOMEPAGE = "http://wiki.thing-printer.com/index.php?title=Toggle"
 SECTION = "devel"
@@ -16,8 +16,9 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 S = "${WORKDIR}/git"
 
 RDEPENDS_${PN} = " \
-	#wxpython \
-	python-pyserial \
+    libclutter-1.0 \
+    libmx-2.0 \
+    libmash-0.2 \
 "
 
 do_install_append () {

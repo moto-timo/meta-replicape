@@ -14,7 +14,6 @@ RDEPENDS_${PN} = " \
     pypruss \
 	libprussdrv \
     redeem-firmware \
-    redeem-systemd \
     tty0tty \
     tty0tty-systemd \
 "
@@ -27,22 +26,32 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 do_install_append () {
-    install -d ${D}/opt
-    install -d ${D}/opt/Replicape
-    install -d ${D}/opt/Replicape/software
-    install -d ${D}/opt/Replicape/software/config
-    install -m 0644 ${S}/*.py ${D}/opt/Replicape/software
-    install -m 0644 ${S}/*.c ${D}/opt/Replicape/software
-    install -m 0644 ${S}/config/*.cfg ${D}/opt/Replicape/software/config
-#    ln -s /opt/Replicape/software/config/Thing.cfg /opt/Replicape/software/config/default.cfg
+    install -d ${D}/usr/
+    install -d ${D}/usr/src/
+    install -d ${D}/usr/src/redeem
+    install -d ${D}/usr/src/redeem/software
+    install -d ${D}/usr/src/redeem/software/config
+    install -m 0644 ${S}/*.py ${D}/usr/src/redeem/software
+    install -m 0644 ${S}/*.c ${D}/usr/src/redeem/software
+    install -m 0644 ${S}/config/*.cfg ${D}/usr/src/redeem/software/config
+    ln -s /usr/src/redeem/software/config/Thing.cfg /usr/src/redeem/software/config/default.cfg
+
+    install -d ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system/redeem.d
+    install -m 0644 ${S}/systemd/redeem.service ${D}${systemd_unitdir}/system
+    sed -i 's:/etc/init.d/:${systemd_unitdir}/system/redeem.d/:g' ${D}${systemd_unitdir}/system/redeem.service
+    install -m 0755 ${S}/systemd/redeem.sh ${D}${systemd_unitdir}/system/redeem.d/
 }
 
 FILES_${PN} += " \
-	    /opt \
-	    /opt/Replicape \
-	    /opt/Replicape/software \
-            /opt/Replicape/software/*.py \
-            /opt/Replicape/software/*.c \
-	    /opt/Replicape/software/config \
-            /opt/Replicape/software/config/*.cfg \
+	    /usr/ \
+	    /usr/src/ \
+	    /usr/src/redeem \
+	    /usr/src/redeem/software \
+            /usr/src/redeem/software/*.py \
+            /usr/src/redeem/software/*.c \
+	    /usr/src/redeem/software/config \
+            /usr/src/redeem/software/config/*.cfg \
+        ${systemd_unitdir}/system/redeem.service \
+	    ${systemd_unitdir}/system/redeem.d/redeem.sh \
 "
