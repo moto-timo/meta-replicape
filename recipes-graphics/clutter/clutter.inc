@@ -3,11 +3,10 @@ HOMEPAGE = "http://www.clutter-project.org/"
 LICENSE = "LGPLv2.1+"
 
 # Internal json-glib was removed in Clutter 1.5.2, cogl was removed in 1.8, atk required since 1.8
-STDDEPENDS = "virtual/libx11 pango glib-2.0 libxfixes libxi json-glib cogl atk"
+STDDEPENDS = "pango glib-2.0 json-glib cogl atk"
 BASE_CONF = "${@get_clutter_fpu_setting(bb, d)}"
 
-DEPENDS = "${STDDEPENDS} virtual/libgl libdrm"
-EXTRA_OECONF = "${BASE_CONF} --with-flavour=glx"
+EXTRA_OECONF = "${BASE_CONF}"
 
 FILESPATH = "${FILE_DIRNAME}/clutter"
 

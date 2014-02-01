@@ -13,11 +13,12 @@ SRCREV = "ee6e8df92c242fbf91990466a119c9d949b12d8d"
 
 S = "${WORKDIR}/git"
 
+RDEPENDS_${PN} = "libprussdrv"
+
 inherit distutils
 
-RDEPENDS_${PV} += "libprussdrv"
 
-do_compile () {
-    sed -i -e "s:data_files=[('/usr/local/lib', ['pypruss/lib/libprussdrv.so'])],::g" setup.py
-    distutils_do_compile
+do_compile_prepend () {
+    sed -i -e "s:/usr/include/python2.7:${TMPDIR}/sysroots/beaglebone/usr/include/python2.7:g" setup.py
+    sed -i -e "s:/usr/include:${TMPDIR}/sysroots/beaglebone/usr/include:g" setup.py
 }

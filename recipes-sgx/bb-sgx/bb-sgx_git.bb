@@ -27,7 +27,7 @@ inherit module
 do_compile(){
 	cp ${S}/Rules.make.dist ${S}/Rules.make
 	sed -i -e 's:@@HOME@@:/home/iagent:' ${S}/Rules.make
-	sed -i -e 's:@@CSTOOL_DIR@@:${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/:' ${S}/Rules.make
+	sed -i -e 's:@@CSTOOL_DIR@@:/home/iagent/workspace/setup-scripts/build/tmp-angstrom_v2013_06-eglibc/sysroots/i686-linux/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/:' ${S}/Rules.make
 	sed -i -e 's:@@CSTOOL_PREFIX@@:arm-angstrom-linux-gnueabi-:' ${S}/Rules.make
 	sed -i -e 's:@@KERNEL_INSTALL_DIR@@:${STAGING_KERNEL_DIR}:' ${S}/Rules.make
 	sed -i -e 's:@@TARGETFS_INSTALL_DIR@@:${S}/remotefs:' ${S}/Rules.make
@@ -138,5 +138,4 @@ FILES_${PN} +=" \
 	${bindir}/ews_test_gles2_pp.frag \
 	${bindir}/ews_test_swrender \
 "
-
 

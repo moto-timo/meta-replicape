@@ -14,4 +14,3 @@ SRC_URI += "file://no-tests.patch \
 SRC_URI[archive.md5sum] = "8e846804d6e219bc795a26a4a39b5bfd"
 SRC_URI[archive.sha256sum] = "7d7bc99c3d9b580cb4fe787fe47824e56e39534b9040e1c8a2a159248d8e5821"
 
-#PARALLEL_MAKE = ""

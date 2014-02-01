@@ -2,11 +2,19 @@ DESCRIPTION = "a modern 3D graphics API with associated utility APIs"
 HOMEPAGE = "http://wiki.clutter-project.org/wiki/Cogl"
 LICENSE = "LGPLv2.1+"
 
-STDDEPENDS = "virtual/libx11 pango glib-2.0 libxfixes gdk-pixbuf libxi"
+STDDEPENDS = "pango glib-2.0 gdk-pixbuf"
 BASE_CONF = "${@get_clutter_fpu_setting(bb, d)}"
 
-DEPENDS = "${STDDEPENDS} virtual/libgles2 libxcomposite libxdamage libdrm"
-EXTRA_OECONF = "${BASE_CONF} --enable-wayland-egl-platform=yes --enable-gles2=yes --enable-gl=no --enable-xlib-egl-platform=no"
+DEPENDS = "${STDDEPENDS} virtual/libgles2"
+EXTRA_OECONF = "${BASE_CONF} \ 
+				--enable-gles2=yes \
+				--enable-gl=no \ 
+				--enable-glx=no \
+				--enable-wgl=no \
+				--enable-wayland-egl-platform=no \ 
+				--enable-xlib-egl-platform=no \
+				--enable-kms-egl-platform=no \
+				--enable-null-egl-platform=yes"
 
 FILESPATH = "${FILE_DIRNAME}/cogl"
 

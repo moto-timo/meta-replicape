@@ -13,6 +13,10 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 
 S = "${WORKDIR}/git/libs/spi"
 
+do_compile_prepend(){
+    sed -i -e "s:/usr/include:${TMPDIR}/sysroots/beaglebone/usr/include:g" setup.py
+}
+
 FILES_${PN} += " \
 "
 

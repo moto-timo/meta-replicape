@@ -1,0 +1,16 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+   	compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+        part-number = "BB-SGX";
+        version = "00A0";
+
+        fragment@0 {
+               target = <&sgx>;
+               __overlay__ {
+                        status = "okay";
+               };
+        };
+};

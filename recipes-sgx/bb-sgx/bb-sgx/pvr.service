@@ -1,0 +1,10 @@
+[Unit]
+Description=Start PVR service
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/sh /etc/init.d/rc.pvr start
+ExecStop=/bin/sh /etc/init.d/rc.pvr stop
+
+[Install]
+WantedBy=basic.target

@@ -7,16 +7,6 @@ S .="/eeprom"
 
 DEPENDS = "nodejs"
 
-FILES_${PN} = " \
-              /sys \
-              /sys/bus \
-              /sys/bus/i2c \
-              /sys/bus/i2c/drivers \
-              /sys/bus/i2c/drivers/at24 \
-              /sys/bus/i2c/drivers/at24/1-0054 \
-              /sys/bus/i2c/drivers/at24/1-0054/eeprom \
-"
-
 do_compile () {
     node ./eeprom.js -w replicape_${PV}.json
 }
@@ -27,4 +17,14 @@ do_install () {
     install -m 0644 ${S}/eeprom ${D}/sys/bus/i2c/drivers/at24/1-0054/
 }
 
+
+
+FILES_${PN} = " \
+              /usr \
+              /usr/src/ \
+              /usr/src/replicape \
+              /usr/src/replicape/replicape_${PV}.json \
+              /usr/src/replicape/Replicape.eeprom \
+              /usr/src/replicape/device_tree \
+"
 

@@ -12,10 +12,8 @@ RDEPENDS_${PN} = " \
 	python-profile \
     python-spi \
     pypruss \
-	libprussdrv \
-    redeem-firmware \
     tty0tty \
-    tty0tty-systemd \
+    redeem-firmware \
 "
 
 inherit distutils
@@ -34,13 +32,13 @@ do_install_append () {
     install -m 0644 ${S}/*.py ${D}/usr/src/redeem/software
     install -m 0644 ${S}/*.c ${D}/usr/src/redeem/software
     install -m 0644 ${S}/config/*.cfg ${D}/usr/src/redeem/software/config
-    ln -s /usr/src/redeem/software/config/Thing.cfg /usr/src/redeem/software/config/default.cfg
+    cd ${D}/usr/src/redeem/software/config/; ln -s Thing.cfg default.cfg
 
     install -d ${D}${systemd_unitdir}/system
-    install -d ${D}${systemd_unitdir}/system/redeem.d
-    install -m 0644 ${S}/systemd/redeem.service ${D}${systemd_unitdir}/system
-    sed -i 's:/etc/init.d/:${systemd_unitdir}/system/redeem.d/:g' ${D}${systemd_unitdir}/system/redeem.service
-    install -m 0755 ${S}/systemd/redeem.sh ${D}${systemd_unitdir}/system/redeem.d/
+    install -m 0644 ${S}/../systemd/redeem.service ${D}${systemd_unitdir}/system
+    install -d ${D}/etc/
+    install -d ${D}/etc/init.d/
+    install -m 0755 ${S}/../systemd/redeem.sh ${D}/etc/init.d
 }
 
 FILES_${PN} += " \
@@ -48,10 +46,12 @@ FILES_${PN} += " \
 	    /usr/src/ \
 	    /usr/src/redeem \
 	    /usr/src/redeem/software \
-            /usr/src/redeem/software/*.py \
-            /usr/src/redeem/software/*.c \
+        /usr/src/redeem/software/*.py \
+        /usr/src/redeem/software/*.c \
 	    /usr/src/redeem/software/config \
-            /usr/src/redeem/software/config/*.cfg \
+        /usr/src/redeem/software/config/*.cfg \
         ${systemd_unitdir}/system/redeem.service \
-	    ${systemd_unitdir}/system/redeem.d/redeem.sh \
+        /etc/ \
+        /etc/init.d/ \
+	    /etc/init.d/redeem.sh \
 "

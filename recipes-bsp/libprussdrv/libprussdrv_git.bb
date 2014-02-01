@@ -1,4 +1,4 @@
-SUMMARY = "libprussdrv - PRU driver library"
+SUMMARY = "libprussdrv - an interface to program the PRUs on am335x SoCs"
 DESCRIPTION = "libprussdrv - driver library for programmable realtime unit sub system"
 SECTION = "devel"
 
@@ -23,12 +23,13 @@ do_compile () {
 do_install() {
     install -d ${D}${libdir}
     install -m 0755 ${S}/libprussdrv.so.1.0.0 ${D}${libdir}
-    ln -s libprussdrv.so.1.0.0 ${D}${libdir}/libprussdrv.so.1
-    ln -s libprussdrv.so.1.0.0 ${D}${libdir}/libprussdrv.so
+    cd ${D}${libdir}; ln -s libprussdrv.so.1.0.0 libprussdrv.so.1
+    cd ${D}${libdir}; ln -s libprussdrv.so.1 libprussdrv.so
 }
 
 FILES_${PN} = " \
                ${libdir} \
-               ${libdir}/libprussdrv.so.${PV} \
+               ${libdir}/libprussdrv.so.1.0.0 \
+               ${libdir}/libprussdrv.so.1 \
                ${libdir}/libprussdrv.so \
 "
