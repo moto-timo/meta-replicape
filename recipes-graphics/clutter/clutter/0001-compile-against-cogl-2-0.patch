@@ -1,0 +1,26 @@
+From dd34f189e48ac740a58beedecb3baed86706b21c Mon Sep 17 00:00:00 2001
+From: Lionel Landwerlin <llandwerlin@gmail.com>
+Date: Mon, 9 Sep 2013 07:53:20 +0100
+Subject: [PATCH] experimental: use Cogl 2.0 introspection
+
+---
+ clutter/Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/clutter/Makefile.am b/clutter/Makefile.am
+index a045be3..0450132 100644
+--- a/clutter/Makefile.am
++++ b/clutter/Makefile.am
+@@ -970,8 +970,8 @@ Clutter_@CLUTTER_API_VERSION_AM@_gir_FILES = \
+ 	$(source_c) \
+ 	$(deprecated_c) \
+ 	$(built_source_c)
+-Clutter_@CLUTTER_API_VERSION_AM@_gir_CFLAGS = $(AM_CPPFLAGS) $(CLUTTER_CFLAGS)
+-Clutter_@CLUTTER_API_VERSION_AM@_gir_INCLUDES = GL-1.0 GObject-2.0 cairo-1.0 Cogl-1.0 CoglPango-1.0 Atk-1.0 Json-1.0
++Clutter_@CLUTTER_API_VERSION_AM@_gir_CFLAGS = $(AM_CPPFLAGS) $(CLUTTER_CFLAGS) -DCOGL_ENABLE_EXPERIMENTAL_API=1 -DCLUTTER_ENABLE_EXPERIMENTAL_API=1
++Clutter_@CLUTTER_API_VERSION_AM@_gir_INCLUDES = GL-1.0 GObject-2.0 cairo-1.0 Cogl-2.0 CoglPango-2.0 Atk-1.0 Json-1.0
+ Clutter_@CLUTTER_API_VERSION_AM@_gir_SCANNERFLAGS = \
+ 	--warn-all \
+ 	--c-include='clutter/clutter.h' \
+-- 
+1.8.5.2

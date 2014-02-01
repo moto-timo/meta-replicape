@@ -1,0 +1,146 @@
+diff --git a/arch/arm/boot/dts/am33xx.dtsi b/arch/arm/boot/dts/am33xx.dtsi
+index 8aabaa0..d930805 100644
+--- a/arch/arm/boot/dts/am33xx.dtsi
++++ b/arch/arm/boot/dts/am33xx.dtsi
+@@ -712,5 +712,20 @@
+ 			#size-cells = <1>;
+ 			status = "disabled";
+ 		};
++
++		prcm: prcm@44e00000 {
++			compatible = "ti,am3352-prcm";
++			reg = <0x44e00000 0x1300>;
++			#reset-cells = <1>;
++		};
++
++		sgx: sgx@0x56000000 {
++			compatible = "ti,sgx";
++			ti,hwmods = "gfx";
++			reg = <0x56000000 0x1000000>;
++			interrupts = <37>;
++			resets = <&prcm 0>;
++			status = "disabled";
++		};
+ 	};
+ };
+diff --git a/arch/arm/kernel/setup.c b/arch/arm/kernel/setup.c
+index 0e1e2b3..f54e1fb 100644
+--- a/arch/arm/kernel/setup.c
++++ b/arch/arm/kernel/setup.c
+@@ -1053,3 +1053,12 @@ const struct seq_operations cpuinfo_op = {
+ 	.stop	= c_stop,
+ 	.show	= c_show
+ };
++
++/* export the cache management functions */
++#ifndef MULTI_CACHE
++
++EXPORT_SYMBOL(__glue(_CACHE,_dma_map_area));
++EXPORT_SYMBOL(__glue(_CACHE,_dma_unmap_area));
++EXPORT_SYMBOL(__glue(_CACHE,_dma_flush_range));
++
++#endif
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 1a862df..ac07962 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -12,13 +12,16 @@ menuconfig RESET_CONTROLLER
+ 
+ 	  If unsure, say no.
+ 
+-if RESET_CONTROLLER
++if	RESET_CONTROLLER
+ 
+-config RESET_GPIO
+-	tristate "GPIO reset controller support"
+-	depends on GPIOLIB && OF
++config	RESET_TI
++	bool "TI reset controller"
+ 	help
+-	  This driver provides support for reset lines that are controlled
+-	  directly by GPIOs.
++	  Reset controller support for TI SoC's
++
++	  Reset controller found in TI's AM series of SoC's like
++	  AM335x and AM43x and OMAP SoC's like OMAP5 and DRA7
++
++	  If unsure, say no.
+ 
+ endif
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index b854f20..fafc87c 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -1,2 +1,2 @@
+ obj-$(CONFIG_RESET_CONTROLLER) += core.o
+-obj-$(CONFIG_RESET_GPIO) += gpio-reset.o
++obj-$(CONFIG_RESET_TI) += ti_reset.o
+diff --git a/drivers/reset/core.c b/drivers/reset/core.c
+index d1b6089..ba12171 100644
+--- a/drivers/reset/core.c
++++ b/drivers/reset/core.c
+@@ -127,6 +127,38 @@ int reset_control_deassert(struct reset_control *rstc)
+ EXPORT_SYMBOL_GPL(reset_control_deassert);
+ 
+ /**
++ * reset_control_is_reset - check reset status
++ * @rstc: reset controller
++ *
++ * Returns a boolean or negative error code
++ *
++ */
++int reset_control_is_reset(struct reset_control *rstc)
++{
++	if (rstc->rcdev->ops->is_reset)
++		return rstc->rcdev->ops->is_reset(rstc->rcdev, rstc->id);
++
++	return -ENOSYS;
++}
++EXPORT_SYMBOL_GPL(reset_control_is_reset);
++
++/**
++ * reset_control_clear_reset - clear the reset
++ * @rstc: reset controller
++ *
++ * Returns zero on success or negative error code
++ *
++ */
++int reset_control_clear_reset(struct reset_control *rstc)
++{
++	if (rstc->rcdev->ops->clear_reset)
++		return rstc->rcdev->ops->clear_reset(rstc->rcdev, rstc->id);
++
++	return -ENOSYS;
++}
++EXPORT_SYMBOL_GPL(reset_control_clear_reset);
++
++/**
+  * reset_control_get - Lookup and obtain a reference to a reset controller.
+  * @dev: device to be reset by the controller
+  * @id: reset line name
+diff --git a/include/linux/reset-controller.h b/include/linux/reset-controller.h
+index 2f61311..c9bbadb 100644
+--- a/include/linux/reset-controller.h
++++ b/include/linux/reset-controller.h
+@@ -17,6 +17,8 @@ struct reset_control_ops {
+ 	int (*reset)(struct reset_controller_dev *rcdev, unsigned long id);
+ 	int (*assert)(struct reset_controller_dev *rcdev, unsigned long id);
+ 	int (*deassert)(struct reset_controller_dev *rcdev, unsigned long id);
++	int (*is_reset)(struct reset_controller_dev *rcdev, unsigned long id);
++	int (*clear_reset)(struct reset_controller_dev *rcdev, unsigned long i);
+ };
+ 
+ struct module;
+diff --git a/include/linux/reset.h b/include/linux/reset.h
+index 6082247..da59f9f 100644
+--- a/include/linux/reset.h
++++ b/include/linux/reset.h
+@@ -7,6 +7,8 @@ struct reset_control;
+ int reset_control_reset(struct reset_control *rstc);
+ int reset_control_assert(struct reset_control *rstc);
+ int reset_control_deassert(struct reset_control *rstc);
++int reset_control_is_reset(struct reset_control *rstc);
++int reset_control_clear_reset(struct reset_control *rstc);
+ 
+ struct reset_control *reset_control_get(struct device *dev, const char *id);
+ void reset_control_put(struct reset_control *rstc);

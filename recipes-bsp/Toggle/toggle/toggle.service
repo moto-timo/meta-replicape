@@ -1,0 +1,13 @@
+[Unit]
+Description=Toggle is the Redeem/Replicape user interface
+
+[Service]
+RemainAfterExit=yes
+Type=simple
+ExecStart=/etc/init.d/toggle.sh start
+ExecStop=/etc/init.d/toggle.sh stop
+Restart=always
+
+[Install]
+WantedBy=basic.target
+
