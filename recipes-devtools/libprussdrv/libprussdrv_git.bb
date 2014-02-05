@@ -27,6 +27,7 @@ do_install() {
     cd ${D}${libdir}; ln -s libprussdrv.so.1 libprussdrv.so
 }
 
+
 FILES_${PN} = " \
                ${libdir} \
                ${libdir}/libprussdrv.so.1.0.0 \

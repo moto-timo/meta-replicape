@@ -13,6 +13,8 @@ SRC_URI = "git://git.gnome.org/cogl;protocol=git;branch=lionel/introspection-nex
 "
 S = "${WORKDIR}/git"
 
+RDEPENDS_${PV} += "bb-sgx-dev"
+
 do_configure_prepend() {
 	sed -i -e 's:EXTRA_DIST +=:EXTRA_DIST =:g' ${S}/doc/reference/cogl-gst/Makefile.am
 	sed -i -e 's:EXTRA_DIST +=:EXTRA_DIST =:g' ${S}/doc/reference/cogl-2.0-experimental/Makefile.am

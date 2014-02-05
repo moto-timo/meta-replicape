@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://GFX_Linux_KM/GPL-COPYING;md5=60422928ba677faaa13d6ab5
 
 
 SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protocol=https"
-SRCREV = "e6abf3169630186f57a90ba218b3880839bbf2e5"
+SRCREV = "299abc737d3dd080f8c2bdbeafe0b69f0f984884"
 
 # Force in GNU_HASH and paths to libs
 TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L${BINLOCATION} \
@@ -34,6 +34,8 @@ do_compile(){
 	sed -i -e 's:@@GRAPHICS_INSTALL_DIR@@:${S}:' ${S}/Rules.make
 
 	make all
+    
+    dtc -O dtb -o BB-SGX-00A0.dtbo -b 0 -@ BB-SGX-00A0.dts
 }
 
 do_install(){
@@ -45,6 +47,8 @@ do_install(){
 	install -d ${D}/etc/init.d
 	install -d ${D}${libdir}
 	install -d ${D}${bindir}
+    install -d ${D}/lib
+    install -d ${D}/lib/firmware
 
 	install -m 0644 ${S}/remotefs/etc/powervr.ini											${D}/etc/
 	install -m 0644 ${S}/remotefs/etc/init.d/rc.pvr 										${D}/etc/init.d/
@@ -74,6 +78,9 @@ do_install(){
 	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.vert   	${D}${bindir}/ 	
 	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.frag	 	${D}${bindir}/ 	
 	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_swrender		 	${D}${bindir}/ 	
+
+    install -m 0644 ${S}/BB-SGX-00A0.dts  ${D}/lib/firmware
+    install -m 0644 ${S}/BB-SGX-00A0.dtbo ${D}/lib/firmware
 }
 
 FILES_${PN} +=" \
@@ -137,6 +144,9 @@ FILES_${PN} +=" \
 	${bindir}/ews_test_gles2_pp.vert \
 	${bindir}/ews_test_gles2_pp.frag \
 	${bindir}/ews_test_swrender \
+    /lib \
+    /lib/firmware \
+    /lib/firmware/BB-SGX-00A0.dts \
+    /lib/firmware/BB-SGX-00A0.dtbo \
 "
-
 

@@ -13,7 +13,7 @@ SRCREV = "ee6e8df92c242fbf91990466a119c9d949b12d8d"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "libprussdrv"
+DEPENDS_${PN} = "libprussdrv-dev"
 
 inherit distutils
 

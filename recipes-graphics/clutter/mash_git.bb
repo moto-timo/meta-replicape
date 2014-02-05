@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
 
 inherit autotools pkgconfig gtk-doc gettext
 
+CFLAGS_prepend = "-I/usr/include/glib-2.0 "
+
 # The following is necessary to get the path of the g-ir stuff right
 SCANNER_ENV = "PKG_CONFIG=${STAGING_DIR_NATIVE}${bindir_native}/pkg-config PKG_CONFIG_PATH=${PKG_CONFIG_PATH} PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR}"
 SCANNER_ARGS = "--library-path=${STAGING_DIR_HOST}${libdir}"

@@ -1,0 +1,3 @@
+serial:
+  port: /dev/pts/1
+  additionalPorts: /dev/pts/*

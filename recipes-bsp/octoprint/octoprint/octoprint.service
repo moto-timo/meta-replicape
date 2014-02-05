@@ -1,0 +1,12 @@
+[Unit]
+Description=The responsive web interface for your 3D printer
+
+[Service]
+RemainAfterExit=yes
+Type=simple
+ExecStart=/etc/init.d/octoprint.sh start
+ExecStop=/etc/init.d/octoprint.sh stop
+Restart=always
+
+[Install]
+WantedBy=basic.target

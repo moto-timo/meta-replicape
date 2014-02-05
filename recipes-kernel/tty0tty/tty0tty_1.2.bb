@@ -14,7 +14,10 @@ SRC_URI += " \
     file://0003-Add-tty0tty.service.patch \
 "
 
+inherit systemd
 
+NATIVE_SYSTEMD_SUPPORT = "1"
+SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "tty0tty.service"
 
 # Only build the userspace app

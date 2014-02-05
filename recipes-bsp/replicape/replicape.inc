@@ -7,6 +7,6 @@ LICENSE = "CC-BY-SA-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
 SRC_URI = "git://bitbucket.org/intelligentagent/replicape.git;protocol=https"
-SRCREV = "d4ace928883656a1917968b97dca09609a9da4f8"
+SRCREV = "a2b195880014c7c27aabd7c0a8d140c5564007ad"
 
 S = "${WORKDIR}/git"
