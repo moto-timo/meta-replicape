@@ -1,32 +1,10 @@
 SUMMARY = "OctoPrint provides a responsive web interface for controlling a 3D printer (RepRap, Ultimaker, ...)."
-SECTION = "devel/python"
-
 HOMEPAGE = "http://octoprint.org"
 
-LICENSE = "AGPL"
+SECTION = "devel/python"
+
+LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=73f1eb20517c55bf9493b7dd6e480788"
-
-SRC_URI = "git://github.com/foosel/OctoPrint.git;protocol=https\ 
-           file://config.yaml \
-           file://octoprint.service \
-           file://octoprint.sh"
-
-SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9"
-
-S = "${WORKDIR}/git"
-
-inherit setuptools
-inherit systemd
-
-NATIVE_SYSTEMD_SUPPORT = "1"
-SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "octoprint.service"
-
-export BUILD_SYS
-export HOST_SYS
-export STAGING_INCDIR
-export STAGING_LIBDIR
-
 
 DEPENDS{PN} = " python-tornado \
                  python-pyyaml \
@@ -46,6 +24,27 @@ DEPENDS{PN} = " python-tornado \
                  python-blinker \
                  python-netaddr \
 "
+
+SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9"
+
+SRC_URI = "git://github.com/foosel/OctoPrint.git;protocol=https\ 
+           file://config.yaml \
+           file://octoprint.service \
+           file://octoprint.sh"
+
+S = "${WORKDIR}/git"
+
+inherit setuptools
+inherit systemd
+
+NATIVE_SYSTEMD_SUPPORT = "1"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "octoprint.service"
+
+export BUILD_SYS
+export HOST_SYS
+export STAGING_INCDIR
+export STAGING_LIBDIR
 
 BBCLASSEXTEND = "native"
 
