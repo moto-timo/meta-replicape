@@ -13,12 +13,14 @@ SRCREV = "ee6e8df92c242fbf91990466a119c9d949b12d8d"
 
 S = "${WORKDIR}/git"
 
-DEPENDS_${PN} = "libprussdrv-dev"
+DEPENDS_${PN} = "libprussdrv1"
 
 inherit distutils
 
 
+
 do_compile_prepend () {
-    sed -i -e "s:/usr/include/python2.7:${TMPDIR}/sysroots/beaglebone/usr/include/python2.7:g" setup.py
-    sed -i -e "s:/usr/include:${TMPDIR}/sysroots/beaglebone/usr/include:g" setup.py
+    sed -i 's: vars: #vars:g' setup.py
+    sed -i -e "s:/usr/include/python2.7:${STAGING_DIR_TARGET}/usr/include/python2.7:g" setup.py
+    sed -i -e "s:/usr/include:${STAGING_DIR_TARGET}/usr/include:g" setup.py
 }

@@ -120,6 +120,8 @@ sync
 
 mount /dev/mmcblk1p1 ${PART1MOUNT}
 
+ERROR="Stuff with error: "
+
 if [ -e ${PART1MOUNT}/ID.txt ] ; then
 	echo "ID.txt found"
 else

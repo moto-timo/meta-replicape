@@ -28,7 +28,7 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 
-RDEPENDS{PN} = " python-tornado \
+DEPENDS{PN} = " python-tornado \
                  python-pyyaml \
                  python-numpy \
                  python-pyserial \

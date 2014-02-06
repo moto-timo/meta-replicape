@@ -1,12 +1,10 @@
 include redeem.inc
 
-SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;branch=Rev-A3;protocol=https"
-SRCREV = "09d868dab213ff39077c604f8f7857776b29295a"
+SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;branch=Rev-A4;protocol=https"
+SRCREV = "8e92b2bf88f022c4d32dceecfdae81e1c05287a2"
 
 LICENSE = "CC-BY-SA-2.0"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
-
-
 
 S .= "/software"
 
@@ -16,12 +14,18 @@ RDEPENDS_${PN} = " \
 	python-mmap \
 	python-profile \
     python-spi \
+    python-multiprocessing \
     pypruss \
     tty0tty \
     redeem-firmware \
 "
 
 inherit distutils
+inherit systemd
+
+NATIVE_SYSTEMD_SUPPORT = "1"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "redeem.service"
 
 export BUILD_SYS
 export HOST_SYS

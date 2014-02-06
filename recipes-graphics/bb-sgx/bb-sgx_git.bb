@@ -15,7 +15,9 @@ LIC_FILES_CHKSUM = "file://GFX_Linux_KM/GPL-COPYING;md5=60422928ba677faaa13d6ab5
                     file://GFX_Linux_KM/MIT-COPYING;md5=8c2810fa6bfdc5ae5c15a0c1ade34054"
 
 
-SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protocol=https"
+SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protocol=https \
+           file://BB-SGX-00A0.dts \
+           file://pvr.service"
 SRCREV = "299abc737d3dd080f8c2bdbeafe0b69f0f984884"
 
 # Force in GNU_HASH and paths to libs
@@ -23,6 +25,11 @@ TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L$
 -L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
 
 inherit module
+inherit systemd
+
+NATIVE_SYSTEMD_SUPPORT = "1"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "pvr.service"
 
 do_compile(){
 	cp ${S}/Rules.make.dist ${S}/Rules.make
@@ -51,36 +58,41 @@ do_install(){
     install -d ${D}/lib/firmware
 
 	install -m 0644 ${S}/remotefs/etc/powervr.ini											${D}/etc/
-	install -m 0644 ${S}/remotefs/etc/init.d/rc.pvr 										${D}/etc/init.d/
+	install -m 0755 ${S}/remotefs/etc/init.d/rc.pvr 										${D}/etc/init.d/
 	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so 						${D}${libdir}/
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvrsrvctl					${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_init_test				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server					${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server_es2				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/services_test				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_blit_test				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_clipblit_test			${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_flip_test				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_render_flip_test		${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvr2d_test					${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1test1					${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1_texture_stream		${D}${bindir}/
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2test1					${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_vertshader.txt 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderA.txt 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderB.txt 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2_texture_stream		${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/eglinfo					${D}${bindir}/
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles1				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2				${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.vert 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.frag 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.vert   	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.frag	 	${D}${bindir}/ 	
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_swrender		 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvrsrvctl					${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_init_test				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server					${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server_es2				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/services_test				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_blit_test				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_clipblit_test			${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_flip_test				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_render_flip_test		${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvr2d_test					${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1test1					${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1_texture_stream		${D}${bindir}/
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2test1					${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_vertshader.txt 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderA.txt 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderB.txt 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2_texture_stream		${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/eglinfo					${D}${bindir}/
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles1				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2				${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.vert 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.frag 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.vert   	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.frag	 	${D}${bindir}/ 	
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_swrender		 	${D}${bindir}/ 	
 
     install -m 0644 ${S}/BB-SGX-00A0.dts  ${D}/lib/firmware
     install -m 0644 ${S}/BB-SGX-00A0.dtbo ${D}/lib/firmware
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/pvr.service ${D}${systemd_unitdir}/system
+
+    install -d ${D}{libdir}/pkgconfig
+    install -d ${D}{libdir}/pkgconfig/egl.pc
 }
 
 FILES_${PN} +=" \
@@ -148,5 +160,7 @@ FILES_${PN} +=" \
     /lib/firmware \
     /lib/firmware/BB-SGX-00A0.dts \
     /lib/firmware/BB-SGX-00A0.dtbo \
+    ${systemd_unitdir}/system \
+    ${systemd_unitdir}/system/pvr.service \
 "
 

@@ -14,6 +14,8 @@ IMAGE_INSTALL += " \
     python-numpy \
     kernel-module-uio-pruss \
     ntpdate \
+    devmem2 \
+    pkgconfig \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

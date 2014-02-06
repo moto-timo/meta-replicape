@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
 SRC_URI = "git://bitbucket.org/intelligentagent/toggle.git;protocol=https \
             file://toggle.service \
-            file://toggle.sh"
+            file://toggle.sh \
+            file://treefrog.ply"
 
 SRCREV = "89ca101cd95440de4f78bdd7331205d86671c7c6"
 
@@ -18,7 +19,7 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = " \
+DEPENDS_${PN} = " \
     clutter \
     mx \
     mash \
@@ -29,10 +30,15 @@ NATIVE_SYSTEMD_SUPPORT = "1"
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "toggle.service"
 
-do_compile(){
-    make
-}
+inherit pkgconfig
 
+#CFLAGS_prepend = "-I /usr/include/clutter-1.0 -I /usr/include/glib-2.0 "
+
+do_compile(){
+    export PKG_CONFIG_LIBDIR=${STAGING_DIR_TARGET}/usr/lib/pkgconfig
+    export PKG_CONFIG_SYSROOT_DIR=${STAGING_DIR_TARGET}
+    oe_runmake
+}
 
 do_install () {
     install -d ${D}${bindir}
@@ -46,6 +52,9 @@ do_install () {
     install -m 0644 ${WORKDIR}/toggle.service ${D}${systemd_unitdir}/system
     install -d ${D}/etc/init.d
     install -m 0755 ${WORKDIR}/toggle.sh ${D}/etc/init.d
+
+    install -d ${D}/usr/share/models
+    install -m 0644 ${WORKDIR}/treefrog.ply ${D}/usr/share/models
 }
 
 FILES_${PN} += " \
@@ -55,7 +64,11 @@ FILES_${PN} += " \
 	    /etc/toggle/ui.json \
 	    /etc/toggle/style/style.css \
         /etc/init.d \
-        /etc/init.d/toggle.sh  \
+        /etc/init.d/toggle.sh \
         ${systemd_unitdir}/system \
         ${systemd_unitdir}/system/toggle.service \
+        /usr \
+        /usr/share \
+        /usr/share/models \
+        /usr/share/models/treefrog.ply \
 "

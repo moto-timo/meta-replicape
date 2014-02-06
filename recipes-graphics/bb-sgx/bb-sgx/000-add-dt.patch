@@ -1,7 +1,0 @@
-diff --git a/Documentation/devicetree/bindings/reset/gpio-reset.txt b/Documentation/devicetree/bindings/reset/gpio-reset.txt
-new file mode 100644
-index 0000000..bca5348
---- /dev/null
-+++ b/Documentation/devicetree/bindings/reset/gpio-reset.txt
-@@ -0,0 +1,35 @@
-+GPIO reset controller
