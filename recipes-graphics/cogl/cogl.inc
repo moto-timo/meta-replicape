@@ -14,7 +14,8 @@ EXTRA_OECONF = "${BASE_CONF} \
 				--enable-wayland-egl-platform=no \ 
 				--enable-xlib-egl-platform=no \
 				--enable-kms-egl-platform=no \
-				--enable-null-egl-platform=yes"
+				--enable-null-egl-platform=yes \
+                --with-gles2-libname=libGLESv2.so"
 
 FILESPATH = "${FILE_DIRNAME}/cogl"
 

@@ -90,7 +90,6 @@ if [ "${HOSTARCH}" = "armv7l" ] ; then
 
 	#echo "Setting timezone to Europe/Paris"
 	#systemd-nspawn -D ${PART2MOUNT} /usr/bin/timedatectl set-timezone Europe/Paris
-
 fi
 
 rm -f ${PART2MOUNT}/etc/pam.d/gdm-autologin
@@ -99,9 +98,20 @@ rm -f ${PART2MOUNT}/etc/systemd/system/multi-user.target.wants/xinput-calibrator
 rm -f ${PART2MOUNT}/etc/systemd/system/multi-user.target.wants/busybox*
 rm -f ${PART2MOUNT}/etc/dropbear/dropbear_rsa_host_key
 ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/xinetd.service
-rm -f /etc/systemd/system/getty.target.wants/serial-getty@ttyO0.service
+# Disable tty1 login
+rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/getty@tty1.service
+
+# link libprussdrv.so to libprussdrv.so.1
+cd ${PART2MOUNT}/usr/lib/
+ln -s libprussdrv.so.1 libprussdrv.so
 
 touch ${PART2MOUNT}/etc/default/locale
+
+# HACK: libEGL.so has no SONAME so it gets a hardcoded path:
+mkdir -p ${PART2MOUNT}/home/iagent/workspace/setup-scripts/build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/lib/
+cd ${PART2MOUNT}/home/iagent/workspace/setup-scripts/build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/lib/
+ln -s /usr/lib/libEGL.so 
+cd /build
 
 # enable wifi
 mkdir -p ${PART2MOUNT}/var/lib/connman/

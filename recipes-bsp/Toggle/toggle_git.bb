@@ -13,7 +13,7 @@ SRC_URI = "git://bitbucket.org/intelligentagent/toggle.git;protocol=https \
             file://toggle.sh \
             file://treefrog.ply"
 
-SRCREV = "89ca101cd95440de4f78bdd7331205d86671c7c6"
+SRCREV = "64e14a9a029f8dd2dd4251880e554b144ee453be"
 
 COMPATIBLE_MACHINE = "(beaglebone)"
 
@@ -55,6 +55,8 @@ do_install () {
 
     install -d ${D}/usr/share/models
     install -m 0644 ${WORKDIR}/treefrog.ply ${D}/usr/share/models
+
+    install -d ${D}/usr/share/X11/xkb
 }
 
 FILES_${PN} += " \
@@ -71,4 +73,5 @@ FILES_${PN} += " \
         /usr/share \
         /usr/share/models \
         /usr/share/models/treefrog.ply \
+        /usr/share/X11/xkb \
 "

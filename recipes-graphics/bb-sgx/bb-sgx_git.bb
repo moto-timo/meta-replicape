@@ -3,7 +3,7 @@ LICENSE = "MIT | GPLv2"
 
 S = "${WORKDIR}/git"
 
-PROVIDES = "libegl virtual/libgles1 virtual/libgles2 virtual/egl"
+PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl"
 
 RREPLACES_${PN} = "libegl libgles1 libgles2"
 RREPLACES_${PN}-dev = "libegl-dev libgles1-dev libgles2-dev"
@@ -17,19 +17,39 @@ LIC_FILES_CHKSUM = "file://GFX_Linux_KM/GPL-COPYING;md5=60422928ba677faaa13d6ab5
 
 SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protocol=https \
            file://BB-SGX-00A0.dts \
-           file://pvr.service"
-SRCREV = "299abc737d3dd080f8c2bdbeafe0b69f0f984884"
+           file://pvr.service \
+           file://egl.pc \
+           file://glesv2.pc"
+SRCREV = "4d7ea5d406b30266b5e340681a7bc7f76726d02c"
 
 # Force in GNU_HASH and paths to libs
-TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L${BINLOCATION} \
--L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
+#TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L${BINLOCATION} \
+#-L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
 
-inherit module
 inherit systemd
 
 NATIVE_SYSTEMD_SUPPORT = "1"
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "pvr.service"
+
+IMGPV = "1.9.2188537"
+
+# Force in GNU_HASH and paths to libs
+TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L${BINLOCATION} \
+-L${STAGING_DIR_TARGET}${libdir} -Wl,-rpath-link,${STAGING_DIR_TARGET}${libdir}"
+PARALLEL_MAKE = ""
+
+do_configure_prepend(){
+	# Attempt to create proper library softlinks
+	for sofile in $(find ${S} -name "lib*Open*.so") $(find ${S} -name "lib*srv*.so") $(find ${S} -name "lib*gl*.so") $(find ${S} -name "libpvr*.so") $(find ${S} -name "lib*GL*.so"); do
+		if [ "$(readlink -n ${sofile})" = "" ] ; then
+			mv $sofile ${sofile}.${IMGPV}
+			ln -sf $(basename ${sofile}.${IMGPV}) ${sofile}
+			ln -sf $(basename ${sofile}.${IMGPV}) ${sofile}$(echo ${IMGPV} | awk -F. '{print "." $1}')
+			ln -sf $(basename ${sofile}.${IMGPV}) ${sofile}$(echo ${IMGPV} | awk -F. '{print "." $1 "." $2}')
+		fi
+	done
+}
 
 do_compile(){
 	cp ${S}/Rules.make.dist ${S}/Rules.make
@@ -59,103 +79,47 @@ do_install(){
 
 	install -m 0644 ${S}/remotefs/etc/powervr.ini											${D}/etc/
 	install -m 0755 ${S}/remotefs/etc/init.d/rc.pvr 										${D}/etc/init.d/
-	install -m 0644 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so 						${D}${libdir}/
+	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so.${IMGPV}			        ${D}${libdir}/
+    cp -d ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so$(echo ${IMGPV} | awk -F. '{print "." $1}')  ${D}${libdir}/
+    cp -d ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so$(echo ${IMGPV} | awk -F. '{print "." $1 "." $2}')  ${D}${libdir}/
+    cp -d ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so                   ${D}${libdir}/
 	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvrsrvctl					${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_init_test				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server					${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_server_es2				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/services_test				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_blit_test				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_clipblit_test			${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_flip_test				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/sgx_render_flip_test		${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/pvr2d_test					${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1test1					${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles1_texture_stream		${D}${bindir}/
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2test1					${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_vertshader.txt 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderA.txt 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/glsltest1_fragshaderB.txt 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/gles2_texture_stream		${D}${bindir}/ 	
 	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/eglinfo					${D}${bindir}/
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles1				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2				${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.vert 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_main.frag 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.vert   	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_gles2_pp.frag	 	${D}${bindir}/ 	
-	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/ews_test_swrender		 	${D}${bindir}/ 	
+
+    install -d ${D}/usr/include/EGL
+    install -m 0644 ${S}/include/OGLES2/EGL/*.h ${D}/usr/include/EGL
+
+    install -d ${D}/usr/include/GLES2
+    install -m 0644 ${S}/include/OGLES2/GLES2/*.h ${D}/usr/include/GLES2
 
     install -m 0644 ${S}/BB-SGX-00A0.dts  ${D}/lib/firmware
     install -m 0644 ${S}/BB-SGX-00A0.dtbo ${D}/lib/firmware
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/pvr.service ${D}${systemd_unitdir}/system
 
-    install -d ${D}{libdir}/pkgconfig
-    install -d ${D}{libdir}/pkgconfig/egl.pc
+    install -d ${D}${libdir}/pkgconfig
+    install -m 0644 ${WORKDIR}/egl.pc ${D}${libdir}/pkgconfig/
+    install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/
+    cd ${D}${libdir}; ln -s libGLESv2.so libglesv2.so
 }
 
 FILES_${PN} +=" \
-	/usr/share/ \
-	/usr/share/gir-1.0 \
-	/usr/share/gir-1.0/Atk-1.0.gir \
-	${libdir}girepository-1.0 \
-	${libdir}girepository-1.0/Atk-1.0.typelib \
 	${bindir} \
-	${libdir}/pvr_drv.so \
+	${bindir}/pvrsrvctl \ 
+	${bindir}/eglinfo \
+	${libdir}/lib*.so* \
+    ${libdir}/pkgconfig \
+    ${libdir}/pkgconfig/*.pc \
+    /usr/ \
+    /usr/include \
+    /usr/include/EGL \
+    /usr/include/EGL/*.h \
+    /usr/include/GLES2 \
+    /usr/include/GLES2/*.h \
 	/etc \
 	/etc/powervr.ini \
 	/etc/init.d \
 	/etc/init.d/rc.pvr \
-	${libdir}/libEGL.so \
-	${libdir}/libEGL_eglimage.so \
-	${libdir}/libews.so \
-	${libdir}/libGLES_CM.so \
-	${libdir}/libGLES_CM_eglimage.so \
-	${libdir}/libGLESv2.so \
-	${libdir}/libGLESv2_eglimage.so \
-	${libdir}/libglslcompiler.so \
-	${libdir}/libglslcompiler_eglimage.so \
-	${libdir}/libIMGegl.so \
-	${libdir}/libIMGegl_eglimage.so \
-	${libdir}/libpvr2d.so \
-	${libdir}/libpvrEWS_REMWSEGL.so \
-	${libdir}/libpvrEWS_WSEGL.so \
-	${libdir}/libpvrPVR2D_BLITWSEGL.so \
-	${libdir}/libpvrPVR2D_DRIWSEGL.so \
-	${libdir}/libpvrPVR2D_FLIPWSEGL.so \
-	${libdir}/libpvrPVR2D_FRONTWSEGL.so \
-	${libdir}/libpvrPVR2D_LINUXFBWSEGL.so \
-	${libdir}/libPVRScopeServices.so \
-	${libdir}/libsrv_init.so \
-	${libdir}/libsrv_um.so \
-	${libdir}/libsrv_um_dri.so \
-	${libdir}/libusc.so \
-	${bindir}/pvrsrvctl \ 
-	${bindir}/sgx_init_test	\
-	${bindir}/ews_server \		
-	${bindir}/ews_server_es2 \
-	${bindir}/services_test	\	
-	${bindir}/sgx_blit_test	\		
-	${bindir}/sgx_clipblit_test	\
-	${bindir}/sgx_flip_test	\	
-	${bindir}/sgx_render_flip_test	\
-	${bindir}/pvr2d_test			\
-	${bindir}/gles1test1			\
-	${bindir}/gles1_texture_stream	\
-	${bindir}/gles2test1			\	
-	${bindir}/glsltest1_vertshader.txt \
-	${bindir}/glsltest1_fragshaderA.txt \
-	${bindir}/glsltest1_fragshaderB.txt \
-	${bindir}/gles2_texture_stream \
-	${bindir}/eglinfo \
-	${bindir}/ews_test_gles1 \
-	${bindir}/ews_test_gles2	\	
-	${bindir}/ews_test_gles2_main.vert \
-	${bindir}/ews_test_gles2_main.frag \
-	${bindir}/ews_test_gles2_pp.vert \
-	${bindir}/ews_test_gles2_pp.frag \
-	${bindir}/ews_test_swrender \
     /lib \
     /lib/firmware \
     /lib/firmware/BB-SGX-00A0.dts \
@@ -163,4 +127,13 @@ FILES_${PN} +=" \
     ${systemd_unitdir}/system \
     ${systemd_unitdir}/system/pvr.service \
 "
+
+
+
+#   /usr
+#	/usr/share 
+#	/usr/share/gir-1.0 
+#	/usr/share/gir-1.0/Atk-1.0.gir 
+#	${libdir}girepository-1.0 
+#	${libdir}girepository-1.0/Atk-1.0.typelib 
 

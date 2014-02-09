@@ -20,6 +20,8 @@ Pull requests pending (meta-beagleboard):
 Todo: 
 2. USB Ethernet does not come up
 8. Disable TTY login
+10. hardcoded link to libEGL.so
+- Add default path: "/usr/share/X11/xkb"
 
 Done: 
 1. Change hostname to thing (from emmc.sh?) (ok)
@@ -28,11 +30,16 @@ Done:
 5. Enable Toggle (?) 
 6. Enable tty0tty
 7. Link /usr/lib/libprussdrv.so.1 (install dev-pkg)
+9. install libprussdrv1 (ok, dependent on pruss)
+
 
 
 Remember: 
-Compiling toggle: add the "-B 0x100000" argument to the build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/bin/crossscripts/qemuwrapper
-Compile Cogl first. Requires 2.0. 
+- Compiling toggle: add the "-B 0x100000" argument to the build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/bin/crossscripts/qemuwrapper
+- Compile Cogl first. Requires 2.0. 
+- Remove the "tests" from the python-pygobject
+
+
 
 If you get this error when compiling Mash: 
 fatal error: glib-object.h: No such file or directory

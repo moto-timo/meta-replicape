@@ -9,6 +9,8 @@ PR = "r4"
 
 DEFAULT_PREFERENCE = "1"
 
+DEPENDS_${PN} += "virtual/libgles1 virtual/libgles2 virtual/egl"
+
 SRC_URI = "git://git.gnome.org/cogl;protocol=git;branch=lionel/introspection-next"
 S = "${WORKDIR}/git"
 
@@ -23,24 +25,11 @@ do_configure_prepend() {
     touch ${S}/gtk-doc.make
 }
 
-
-#do_configure_append() {
-#	sed -i -e 's:INTROSPECTION_COMPILER = /usr/bin/g-ir-compiler:INTROSPECTION_COMPILER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-compiler:g' ${S}/../build/Makefile
-#	sed -i -e 's:INTROSPECTION_MAKEFILE = /usr/share/gobject-introspection-1.0/Makefile.introspection:INTROSPECTION_MAKEFILE = ${STAGING_DIR_TARGET}/usr/share/gobject-introspection-1.0/Makefile.introspection:' ${S}/../build/Makefile
-#	sed -i -e 's:INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner:INTROSPECTION_SCANNER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner:' ${S}/../build/Makefile 
-#
-#	sed -i -e 's:INTROSPECTION_COMPILER = /usr/bin/g-ir-compiler:INTROSPECTION_COMPILER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-compiler:g' ${S}/../build/cogl/Makefile
-#	sed -i -e 's:INTROSPECTION_MAKEFILE = /usr/share/gobject-introspection-1.0/Makefile.introspection:INTROSPECTION_MAKEFILE = ${STAGING_DIR_TARGET}/usr/share/gobject-introspection-1.0/Makefile.introspection:' ${S}/../build/cogl/Makefile
-#	sed -i -e 's:INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner:INTROSPECTION_SCANNER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner:' ${S}/../build/cogl/Makefile 
-#
-#	sed -i -e 's:INTROSPECTION_COMPILER = /usr/bin/g-ir-compiler:INTROSPECTION_COMPILER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-compiler:g' ${S}/../build/cogl-pango/Makefile
-#	sed -i -e 's:INTROSPECTION_MAKEFILE = /usr/share/gobject-introspection-1.0/Makefile.introspection:INTROSPECTION_MAKEFILE = ${STAGING_DIR_TARGET}/usr/share/gobject-introspection-1.0/Makefile.introspection:' ${S}/../build/cogl-pango/Makefile
-#	sed -i -e 's:INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner:INTROSPECTION_SCANNER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner:' ${S}/../build/cogl-pango/Makefile 
-#}
-
+do_compile_prepend(){
+    sed -i "s:#ifndef EGL_KHR_create_context:#ifndef EGL_KHR_create_context\n#define EGL_SYNC_FENCE_KHR 0x30F9:" ${S}/cogl/winsys/cogl-winsys-egl.c
+}
 
 AUTOTOOLS_AUXDIR = "${S}/build"
-
 
 # Add this to extraargs -L/home/iagent/workspace/setup-scripts/build/tmp-angstrom_v2013_06-eglibc/work/armv7ahf-vfp-neon-angstrom-linux-gnueabi/cogl/2.0+gitAUTOINC+7f745cc8b496c1c1fc397641050e52b95a3d6200-r4/build/cogl/.libs/
 # /home/iagent/workspace/setup-scripts/build/tmp-angstrom_v2013_06-eglibc/sysroots/i686-linux/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner
@@ -58,5 +47,5 @@ FILES_${PN} += " \
   /usr/lib/girepository-1.0/Cogl-1.0.typelib \
 "
 
-RDEPENDS_${PV} += "libegl"
 
+# EGL_SYNC_FENCE_KHR                      0x30F9

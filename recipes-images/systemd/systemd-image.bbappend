@@ -16,6 +16,8 @@ IMAGE_INSTALL += " \
     ntpdate \
     devmem2 \
     pkgconfig \
+    gadget-init \
+    kernel-module-g-multi \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"
