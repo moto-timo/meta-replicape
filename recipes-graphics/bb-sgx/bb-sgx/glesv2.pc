@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: glesv2
+Description: GLESv2 egl library
+Version: 1.9.2188537
+Libs: -L${libdir} -lglesv2
+Cflags: -I${includedir}

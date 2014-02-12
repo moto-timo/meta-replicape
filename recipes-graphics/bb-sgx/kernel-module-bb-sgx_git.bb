@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://GFX_Linux_KM/GPL-COPYING;md5=60422928ba677faaa13d6ab5
 
 
 SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protocol=https"
-SRCREV = "e6abf3169630186f57a90ba218b3880839bbf2e5"
+SRCREV = "58dddb1e4da001e7cccf7d38e4e434b4c8355f97"
 
 inherit module
 

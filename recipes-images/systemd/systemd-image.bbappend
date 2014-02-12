@@ -18,7 +18,14 @@ IMAGE_INSTALL += " \
     pkgconfig \
     gadget-init \
     kernel-module-g-multi \
+    xkeyboard-config \
+    gdk-pixbuf-loader-jpeg \
+    gdk-pixbuf-loader-ico \
+    gdk-pixbuf-loader-png \
+    gnome-icon-theme \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"
+
+
 

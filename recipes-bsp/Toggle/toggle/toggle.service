@@ -1,12 +1,10 @@
 [Unit]
-Description=Toggle is the Redeem/Replicape user interface
+Description=The Redeem/Replicape user interface
+After=pvr.service
 
 [Service]
-RemainAfterExit=yes
 Type=simple
-ExecStart=/etc/init.d/toggle.sh start
-ExecStop=/etc/init.d/toggle.sh stop
-Restart=always
+ExecStart=/usr/bin/toggle
 
 [Install]
 WantedBy=basic.target

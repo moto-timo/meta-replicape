@@ -6,31 +6,12 @@ SECTION = "devel/python"
 LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=73f1eb20517c55bf9493b7dd6e480788"
 
-DEPENDS{PN} = " python-tornado \
-                 python-pyyaml \
-                 python-numpy \
-                 python-pyserial \
-                 pytyhon-werkzeug \
-                 python-html \
-                 python-sockjs-tornado \
-                 python-tornado \
-                 python-json \
-                 python-backports-ssl-match-hostname \
-                 python-flask \
-                 python-flask-login \
-                 python-netserver \
-                 python-itsdangerous \
-                 python-markupsafe \
-                 python-blinker \
-                 python-netaddr \
-"
-
 SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9"
 
 SRC_URI = "git://github.com/foosel/OctoPrint.git;protocol=https\ 
            file://config.yaml \
            file://octoprint.service \
-           file://octoprint.sh"
+"
 
 S = "${WORKDIR}/git"
 
@@ -52,11 +33,9 @@ do_install_append(){
     install -d ${D}${bindir}
     install -d ${D}/etc/octoprint
     install -d ${D}/lib/systemd/system
-    install -d ${D}/etc/init.d
     install -m 0644 ${S}/../octoprint.service ${D}${systemd_unitdir}/system
     install -m 0774 ${S}/run ${D}${bindir}/octoprint
     install -m 0644 ${S}/../config.yaml ${D}/etc/octoprint/config.yaml
-    install -m 0774 ${WORKDIR}/octoprint.sh ${D}/etc/init.d/octoprint.sh
 }
 
 FILES_${PN} += " \
@@ -64,14 +43,32 @@ FILES_${PN} += " \
     /usr/bin \
     /usr/bin/octoprint \
     /lib \
-    /etc \
     /lib/systemd \ 
     /lib/systemd/system \
     /lib/systemd/system/octoprint.service \
+    /etc \
     /etc/octoprint \
     /etc/octoprint/config.yaml \
-    /etc/init.d \    
-    /etc/init.d/octoprint.sh \
 "
 
+RDEPENDS_${PN} = "python-tornado \
+                  python-pyyaml \
+                  python-numpy \
+                  python-pyserial \
+                  python-werkzeug \
+                  python-html \
+                  python-sockjs-tornado \
+                  python-tornado \
+                  python-json \
+                  python-backports-ssl-match-hostname \
+                  python-flask \
+                  python-flask-login \
+                  python-flask-principal \
+                  python-netserver \
+                  python-itsdangerous \
+                  python-markupsafe \
+                  python-blinker \
+                  python-netaddr \
+                  python-jinja2 \
+"
 

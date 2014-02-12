@@ -20,7 +20,7 @@ SRC_URI = "git://bitbucket.org/intelligentagent/bb-sgx.git;branch=master;protoco
            file://pvr.service \
            file://egl.pc \
            file://glesv2.pc"
-SRCREV = "4d7ea5d406b30266b5e340681a7bc7f76726d02c"
+SRCREV = "58dddb1e4da001e7cccf7d38e4e434b4c8355f97"
 
 # Force in GNU_HASH and paths to libs
 #TARGET_CC_ARCH += " ${TARGET_LINK_HASH_STYLE} -Wl,-rpath-link,${BINLOCATION} -L${BINLOCATION} \

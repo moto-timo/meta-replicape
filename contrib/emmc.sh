@@ -143,7 +143,7 @@ if [ -e ${PART1MOUNT}/START.htm ] ; then
 	echo "START.htm found"
 else
 	echo "START.htm missing - ERROR"
-	ERROR="${ERROR}, START.htm"
+	#ERROR="${ERROR}, START.htm"
 fi
 
 if [ "${MLOMD5}" != "$(md5sum ${PART1MOUNT}/MLO | awk '{print $1}')" ] ; then        
@@ -175,17 +175,17 @@ dd if=/dev/mmcblk1 of=/dev/null count=100000
 echo "ERRORS found: ${ERROR}" > emmc_install.log
 
 if [ -z "$ERROR" ] ; then
-	if [ -e /sys/class/leds/beaglebone\:green\:usr0/trigger ] ; then
-		echo default-on > /sys/class/leds/beaglebone\:green\:usr0/trigger
-		echo default-on > /sys/class/leds/beaglebone\:green\:usr1/trigger
+	if [ -e /sys/class/leds/beaglebone\:green\:heartbeat/trigger ] ; then
+		echo default-on > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
+		echo default-on > /sys/class/leds/beaglebone\:green\:mmc0/trigger
 		echo default-on > /sys/class/leds/beaglebone\:green\:usr2/trigger
 		echo default-on > /sys/class/leds/beaglebone\:green\:usr3/trigger
 	fi
 else
 	echo "ERRORS found: ${ERROR}"  	
-	if [ -e /sys/class/leds/beaglebone\:green\:usr0/trigger ] ; then
-		echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger
-		echo none > /sys/class/leds/beaglebone\:green\:usr1/trigger
+	if [ -e /sys/class/leds/beaglebone\:green\:heartbeat/trigger ] ; then
+		echo none > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
+		echo none > /sys/class/leds/beaglebone\:green\:mmc0/trigger
 		echo none > /sys/class/leds/beaglebone\:green\:usr2/trigger
 		echo none > /sys/class/leds/beaglebone\:green\:usr3/trigger
 	fi

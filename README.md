@@ -16,33 +16,40 @@ Pull requests pending (meta-beagleboard):
   * pasm -- a [PRU](http://processors.wiki.ti.com/index.php/Programmable_Realtime_Unit_Subsystem) Assembler
   * libprussdrv -- user space driver library for PRUSS
 
+BSP-layer: 
+  * Redeem -- The Replicape Daemon
+  * Toggle -- GUI for 3D-printers suitable for embedded platforms. 
+  * Octoprint -- The responsive web interface for your 3D printer
+  * CuraEngine -- A fast G-code slicer 
+
 
 Todo: 
-2. USB Ethernet does not come up
-8. Disable TTY login
-10. hardcoded link to libEGL.so
-- Add default path: "/usr/share/X11/xkb"
+- USB babble interrupt occured. (added a patch, not tested) 
+- Octoprint internal server error. 
+- g_multi does not load: vermagic:       3.12.9 SMP mod_unload modversions ARMv7 p2v8
 
 Done: 
-1. Change hostname to thing (from emmc.sh?) (ok)
-3. Add thing feeds (ok) 
-4. Enable Redeem
-5. Enable Toggle (?) 
-6. Enable tty0tty
-7. Link /usr/lib/libprussdrv.so.1 (install dev-pkg)
-9. install libprussdrv1 (ok, dependent on pruss)
+- Change hostname to thing (from emmc.sh?) (ok)
+- Add thing feeds (ok) 
+- Enable Redeem (ok)
+- Enable Toggle (ok) 
+- Enable tty0tty (ok)
+- Link /usr/lib/libprussdrv.so.1 (in emmc.sh)
+- install libprussdrv1 (ok, dependent on pruss)
+- Disable TTY login (ok, emmc.sh)
+- hardcoded link in libEGL.so (ok, added path in emmc.sh) 
+- USB Ethernet does not come up (ok, upgraded to 3.12.9)
+- Keyboard config shit (xkeyboard-config?)
+- gdk-pixbuf does not load files. 
+- pvr does not shut down right. (fixed! hacked the kernel module)
+- images on toggle does not load
+- emmc script does not complete right.
 
-
-
-Remember: 
+Remember (Will eventually be a part of recipes): 
 - Compiling toggle: add the "-B 0x100000" argument to the build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/bin/crossscripts/qemuwrapper
 - Compile Cogl first. Requires 2.0. 
 - Remove the "tests" from the python-pygobject
-
-
-
-If you get this error when compiling Mash: 
+- If you get this error when compiling Mash: 
 fatal error: glib-object.h: No such file or directory
 Added this to the mash_git recipe. CFLAGS_prepend = "-I/usr/include/glib-2.0 "
-
 

@@ -8,6 +8,7 @@ MOUNTPOINT="/media/2"
 MOUNTPOINT1="/media/1"
 FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2013.06-beaglebone.rootfs.tar.xz"
 SCRATCHDIR=`pwd`
+BGIMAGE="thing.jpg"
 
 EMMCSCRIPT="sources/meta-replicape/contrib/emmc.sh"
 
@@ -88,6 +89,8 @@ tar xf ${SCRATCHDIR}/flash.tar -C ${MOUNTPOINT}
 
 echo "Copying over bootloader and tarball"
 cp -vf ${DEPLOYDIR}/MLO ${MOUNTPOINT}/build/ && cp -vf ${DEPLOYDIR}/u-boot.img ${MOUNTPOINT}/build/ && cp -vf ${DEPLOYDIR}/${FLASHIMG} ${MOUNTPOINT}/build/
+echo "Copying over thing background image"
+cp -vf ${BGIMAGE} ${MOUNTPOINT}/build/
 
 echo "Copying over flashing script"
 cp -vf ${EMMCSCRIPT} ${MOUNTPOINT}/usr/bin/ 

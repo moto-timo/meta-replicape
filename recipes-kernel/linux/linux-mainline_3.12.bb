@@ -6,7 +6,7 @@ KERNEL_IMAGETYPE = "zImage"
 COMPATIBLE_MACHINE = "(beaglebone)"
 
 # The main PR is now using MACHINE_KERNEL_PR, for omap3 see conf/machine/include/omap3.inc
-MACHINE_KERNEL_PR_append = "a"
+MACHINE_KERNEL_PR_append = "b"
 
 FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.12:${FILE_DIRNAME}/linux-mainline-3.12/${MACHINE}:"
 
@@ -17,7 +17,8 @@ S = "${WORKDIR}/git"
 PV = "3.12"
 
 SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git;branch=linux-3.12.y"
-SRCREV_pn-${PN} = "6beb1be0ea111cea50d410cdafabaa2065295e45"
+#SRCREV_pn-${PN} = "6beb1be0ea111cea50d410cdafabaa2065295e45"
+SRCREV_pn-${PN} = "4a5804b8c293b23786b0743fc9c64b64f5099048"
 
 do_configure_prepend() {
 	if [ -e ${WORKDIR}/am335x-pm-firmware.bin ] ; then

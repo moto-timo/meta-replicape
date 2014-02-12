@@ -2,11 +2,8 @@
 Description=The responsive web interface for your 3D printer
 
 [Service]
-RemainAfterExit=yes
 Type=simple
-ExecStart=/etc/init.d/octoprint.sh start
-ExecStop=/etc/init.d/octoprint.sh stop
-Restart=always
+ExecStart=/usr/bin/octoprint --iknowwhatimdoing --config /etc/octoprint/config.yaml
 
 [Install]
-WantedBy=basic.target
+WantedBy=network-online.target

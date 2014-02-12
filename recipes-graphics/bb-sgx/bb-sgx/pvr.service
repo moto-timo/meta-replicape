@@ -1,8 +1,7 @@
 [Unit]
-Description=Start PVR service
+Description=The PowerVR SGX530 3D engine
 
 [Service]
-RemainAfterExit=yes
 ExecStart=/bin/sh /etc/init.d/rc.pvr start
 ExecStop=/bin/sh /etc/init.d/rc.pvr stop
 
