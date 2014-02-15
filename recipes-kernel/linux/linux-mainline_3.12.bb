@@ -12,6 +12,13 @@ FILESPATH =. "${FILE_DIRNAME}/linux-mainline-3.12:${FILE_DIRNAME}/linux-mainline
 
 KERNEL_EXTRA_ARGS = "LOADADDR=0x80008000"
 
+MACHINE_EXTRA_RRECOMMENDS += " \
+    kernel-module-usb-f-eem \
+    kernel-module-usb-f-ecm \
+    kernel-module-usb-f-acm \
+    kernel-module-u-serial \
+"
+
 S = "${WORKDIR}/git"
 
 PV = "3.12"
@@ -97,6 +104,7 @@ SRC_URI += " \
 	file://pru/0000-add-pruss-to-device-tree.patch \
 	file://pru/0001-add-pruss-to-kconfig.patch \
 	file://pru/0002-make-uio-pruss-dt-comaptible.patch \
+    file://usb/0000-USB-Fix-USB-device-disconnects-on-resume.patch \
 	file://defconfig \
   	file://am335x-pm-firmware.bin \
 	file://logo_linux_clut224.ppm \

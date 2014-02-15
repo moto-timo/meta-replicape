@@ -13,7 +13,7 @@ IMAGE_INSTALL += " \
     replicape-device-tree \
     python-numpy \
     kernel-module-uio-pruss \
-    ntpdate \
+    ntp \
     devmem2 \
     pkgconfig \
     gadget-init \
@@ -23,6 +23,7 @@ IMAGE_INSTALL += " \
     gdk-pixbuf-loader-ico \
     gdk-pixbuf-loader-png \
     gnome-icon-theme \
+    kernel-modules \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

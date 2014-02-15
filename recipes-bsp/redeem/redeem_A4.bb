@@ -1,6 +1,7 @@
 include redeem.inc
 
-SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;branch=Rev-A4;protocol=https"
+SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;branch=Rev-A4;protocol=https \
+    file://redeem.service"
 SRCREV = "8e92b2bf88f022c4d32dceecfdae81e1c05287a2"
 
 LICENSE = "CC-BY-SA-2.0"

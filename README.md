@@ -25,8 +25,21 @@ BSP-layer:
 
 Todo: 
 - USB babble interrupt occured. (added a patch, not tested) 
-- Octoprint internal server error. 
-- g_multi does not load: vermagic:       3.12.9 SMP mod_unload modversions ARMv7 p2v8
+- Octoprint internal server error. Works on 192.168.7.2, not 10.24.2.90
+- Octoprint is not enabled
+  - Perhaps wrong 
+- reposition the frog
+- Failed at step EXEC spawning /usr/lib/connman/wired-setup: No such file or directory
+- Modules were missing. Adding "kernel-modules" to image. Is this necessary?
+- Date not set properly 
+  - trying to change ntpserver in /etc/default/ntpdate
+  - Installed ntp
+  - fixed the setting according to derrek molloys blog-post
+- CPU-freq not set properly
+- can't open '/var/lib/misc/udhcpd.leases': No such file or directory 
+  - touch /var/lib/misc/udhcpd.leases
+- iptables support missing error 2 (No such file or directory)
+  - opkg upgrade iptables
 
 Done: 
 - Change hostname to thing (from emmc.sh?) (ok)
@@ -44,6 +57,8 @@ Done:
 - pvr does not shut down right. (fixed! hacked the kernel module)
 - images on toggle does not load
 - emmc script does not complete right.
+- g_multi does not load (ok, added usb_f_eem)
+- Changed the script on pvr so there is no .sh any more. 
 
 Remember (Will eventually be a part of recipes): 
 - Compiling toggle: add the "-B 0x100000" argument to the build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/bin/crossscripts/qemuwrapper
@@ -52,4 +67,7 @@ Remember (Will eventually be a part of recipes):
 - If you get this error when compiling Mash: 
 fatal error: glib-object.h: No such file or directory
 Added this to the mash_git recipe. CFLAGS_prepend = "-I/usr/include/glib-2.0 "
+
+
+
 

@@ -109,7 +109,7 @@ index f519da9..c568ccf 100644
 +				continue;
 +			}
 +
-+			dev_err(&dev->dev, "Child has %u gpios\n", count);
++			dev_dbg(&dev->dev, "Child has %u gpios\n", count);
 +			for(cnt=0; cnt<count; cnt++){
 +				ret = of_property_read_string_index(child,
 +					"pin-names", cnt, &pin_name);
@@ -127,7 +127,7 @@ index f519da9..c568ccf 100644
  		goto out_free;
  	}
  
-+    dev_err(&dev->dev,"pruss_probe() get_resource ok\n");
++    dev_dbg(&dev->dev,"pruss_probe() get_resource ok\n");
 +
  	if (!regs_prussio->start) {
  		dev_err(&dev->dev, "Invalid memory resource\n");

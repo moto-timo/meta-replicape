@@ -70,15 +70,13 @@ do_install(){
 	mkdir -p ${S}/remotefs/etc/init.d
 	make install
 
-	install -d ${D}/etc
-	install -d ${D}/etc/init.d
 	install -d ${D}${libdir}
 	install -d ${D}${bindir}
     install -d ${D}/lib
     install -d ${D}/lib/firmware
+    install -d ${D}/etc
 
 	install -m 0644 ${S}/remotefs/etc/powervr.ini											${D}/etc/
-	install -m 0755 ${S}/remotefs/etc/init.d/rc.pvr 										${D}/etc/init.d/
 	install -m 0755 ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so.${IMGPV}			        ${D}${libdir}/
     cp -d ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so$(echo ${IMGPV} | awk -F. '{print "." $1}')  ${D}${libdir}/
     cp -d ${S}/remotefs/opt/gfxlibraries/gfx_dbg_es8.x/*.so$(echo ${IMGPV} | awk -F. '{print "." $1 "." $2}')  ${D}${libdir}/
@@ -118,8 +116,6 @@ FILES_${PN} +=" \
     /usr/include/GLES2/*.h \
 	/etc \
 	/etc/powervr.ini \
-	/etc/init.d \
-	/etc/init.d/rc.pvr \
     /lib \
     /lib/firmware \
     /lib/firmware/BB-SGX-00A0.dts \
@@ -127,13 +123,3 @@ FILES_${PN} +=" \
     ${systemd_unitdir}/system \
     ${systemd_unitdir}/system/pvr.service \
 "
-
-
-
-#   /usr
-#	/usr/share 
-#	/usr/share/gir-1.0 
-#	/usr/share/gir-1.0/Atk-1.0.gir 
-#	${libdir}girepository-1.0 
-#	${libdir}girepository-1.0/Atk-1.0.typelib 
-

@@ -1,0 +1,10 @@
+[Unit]
+Description=The Replicape Dameon
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/redeem.py
+
+[Install]
+WantedBy=basic.target
+
