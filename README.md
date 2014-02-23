@@ -25,9 +25,11 @@ BSP-layer:
 
 Todo: 
 - USB babble interrupt occured. (added a patch, not tested) 
+  - CAUTION: musb: Babble Interrupt Occurred  - still happening on hotplug
 - Octoprint internal server error. Works on 192.168.7.2, not 10.24.2.90
 - Octoprint is not enabled
-  - Perhaps wrong 
+  - Perhaps something with avahi? 
+  
 - reposition the frog
 - Failed at step EXEC spawning /usr/lib/connman/wired-setup: No such file or directory
 - Modules were missing. Adding "kernel-modules" to image. Is this necessary?

@@ -24,6 +24,7 @@ IMAGE_INSTALL += " \
     gdk-pixbuf-loader-png \
     gnome-icon-theme \
     kernel-modules \
+    less \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

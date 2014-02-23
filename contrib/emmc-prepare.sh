@@ -17,7 +17,7 @@ DATE="$(date +'%Y.%m.%d')"
 
 echo "Using ${DATE} as identifier"
 
-IMAGENAME="$(basename ${IMAGE} .img)-${DATE}"
+IMAGENAME="$(basename ${IMAGE} .img)-${DATE}.img"
 
 if ! [ -e ${IMAGENAME} ] ; then
 	echo "uncompressing image"

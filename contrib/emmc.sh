@@ -100,6 +100,8 @@ rm -f ${PART2MOUNT}/etc/dropbear/dropbear_rsa_host_key
 ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/xinetd.service
 # Disable tty1 login
 rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/getty@tty1.service
+# Mask the ttyGS0 service
+ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service
 
 # link libprussdrv.so to libprussdrv.so.1
 cd ${PART2MOUNT}/usr/lib/
@@ -175,18 +177,17 @@ dd if=/dev/mmcblk1 of=/dev/null count=100000
 echo "ERRORS found: ${ERROR}" > emmc_install.log
 
 if [ -z "$ERROR" ] ; then
-	if [ -e /sys/class/leds/beaglebone\:green\:heartbeat/trigger ] ; then
-		echo default-on > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
-		echo default-on > /sys/class/leds/beaglebone\:green\:mmc0/trigger
-		echo default-on > /sys/class/leds/beaglebone\:green\:usr2/trigger
-		echo default-on > /sys/class/leds/beaglebone\:green\:usr3/trigger
-	fi
+	echo default-on > /sys/class/leds/beaglebone\:green\:usr0/trigger
+	echo default-on > /sys/class/leds/beaglebone\:green\:usr1/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:mmc0/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:usr2/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:usr3/trigger
 else
-	echo "ERRORS found: ${ERROR}"  	
-	if [ -e /sys/class/leds/beaglebone\:green\:heartbeat/trigger ] ; then
-		echo none > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
-		echo none > /sys/class/leds/beaglebone\:green\:mmc0/trigger
-		echo none > /sys/class/leds/beaglebone\:green\:usr2/trigger
-		echo none > /sys/class/leds/beaglebone\:green\:usr3/trigger
-	fi
+	echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger
+	echo none > /sys/class/leds/beaglebone\:green\:usr1/trigger
+	echo none > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
+	echo none > /sys/class/leds/beaglebone\:green\:mmc0/trigger
+	echo none > /sys/class/leds/beaglebone\:green\:usr2/trigger
+	echo none > /sys/class/leds/beaglebone\:green\:usr3/trigger
 fi

@@ -1,9 +1,10 @@
 [Unit]
 Description=The responsive web interface for your 3D printer
+After=ntpd.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/octoprint --iknowwhatimdoing --config /etc/octoprint/config.yaml
 
 [Install]
-WantedBy=network-online.target
+WantedBy=basic.target
