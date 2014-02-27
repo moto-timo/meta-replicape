@@ -33,8 +33,9 @@ if ! [ -e /dev/mmcblk1 ] ; then
 	exit
 fi
 
-echo "Paritioning eMMC"
+echo "Zeroing eMMC"
 dd if=/dev/zero of=/dev/mmcblk1 bs=16M count=16
+echo "Partitioning eMMC"
 ./mkcard.sh /dev/mmcblk1
 
 echo "Mounting partitions"
@@ -45,7 +46,7 @@ mount /dev/mmcblk1p2 ${PART2MOUNT} -o async,noatime
 
 echo "Copying bootloader files"
 cp MLO u-boot.img ${PART1MOUNT}
-echo "optargs=quiet drm.debug=7 capemgr.enable_partno=BB-SGX fbcon=rotate:3 consoleblank=0 vt.global_cursor_default=0" >> ${PART1MOUNT}/uEnv.txt
+echo "optargs=drm.debug=7 capemgr.enable_partno=BB-SGX consoleblank=0 vt.global_cursor_default=0" > ${PART1MOUNT}/uEnv.txt
 
 umount /dev/mmcblk1p1
 
@@ -101,7 +102,7 @@ ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/xinetd.service
 # Disable tty1 login
 rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/getty@tty1.service
 # Mask the ttyGS0 service
-ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service
+rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service
 
 # link libprussdrv.so to libprussdrv.so.1
 cd ${PART2MOUNT}/usr/lib/
@@ -132,7 +133,7 @@ sync
 
 mount /dev/mmcblk1p1 ${PART1MOUNT}
 
-ERROR="Stuff with error: "
+ERROR=""
 
 if [ -e ${PART1MOUNT}/ID.txt ] ; then
 	echo "ID.txt found"
@@ -162,7 +163,7 @@ umount /dev/mmcblk1p1
 
 mount /dev/mmcblk1p2 ${PART2MOUNT} -o async,noatime
 
-BGMD5SUM_VALID="49b620077b1b78e198554e2272a5e172"
+BGMD5SUM_VALID="82891982dbc8effa7a79baad5959f24a"
 BGMD5SUM="$(md5sum ${PART2MOUNT}/usr/share/pixmaps/thing.jpg | awk '{print $1}')"
 
 if [ "${BGMD5SUM_VALID}" != "${BGMD5SUM}" ] ; then
@@ -175,12 +176,13 @@ umount ${PART2MOUNT}
 dd if=/dev/mmcblk1 of=/dev/null count=100000
 
 echo "ERRORS found: ${ERROR}" > emmc_install.log
+sync
 
 if [ -z "$ERROR" ] ; then
-	echo default-on > /sys/class/leds/beaglebone\:green\:usr0/trigger
-	echo default-on > /sys/class/leds/beaglebone\:green\:usr1/trigger
-  echo default-on > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
-  echo default-on > /sys/class/leds/beaglebone\:green\:mmc0/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:usr0/trigger
+  echo default-on > /sys/class/leds/beaglebone\:green\:usr1/trigger
+	echo default-on > /sys/class/leds/beaglebone\:green\:heartbeat/trigger
+	echo default-on > /sys/class/leds/beaglebone\:green\:mmc0/trigger
   echo default-on > /sys/class/leds/beaglebone\:green\:usr2/trigger
   echo default-on > /sys/class/leds/beaglebone\:green\:usr3/trigger
 else

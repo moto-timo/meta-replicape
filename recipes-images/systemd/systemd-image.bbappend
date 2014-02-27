@@ -25,6 +25,7 @@ IMAGE_INSTALL += " \
     gnome-icon-theme \
     kernel-modules \
     less \
+    gcc \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

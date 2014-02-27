@@ -1,0 +1,177 @@
+- installed kpartx
+- opkg install e2fsprogs-badblocks
+- Removed optargs=quiet
+- synced
+
+- /dev/mapper/control: open failed: No such device
+
+Mar 18 12:47:46 beaglebone emmc.sh[123]: Valid EEPROM header found
+Mar 18 12:47:46 beaglebone emmc.sh[123]: Paritioning eMMC
+Feb 23 20:33:50 beaglebone emmc.sh[123]: 16+0 records in
+Feb 23 20:33:50 beaglebone emmc.sh[123]: 16+0 records out
+Feb 23 20:33:50 beaglebone emmc.sh[123]: 1+0 records in
+Feb 23 20:33:50 beaglebone emmc.sh[123]: 1+0 records out
+Feb 23 20:33:50 beaglebone emmc.sh[123]: DISK SIZE - 1920991232 bytes
+Feb 23 20:33:51 beaglebone emmc.sh[123]: CYLINDERS - 233
+Feb 23 20:33:51 beaglebone emmc.sh[123]: Checking that no-one is using this disk right now ...
+Feb 23 20:33:51 beaglebone emmc.sh[123]: OK
+Feb 23 20:33:51 beaglebone emmc.sh[123]: Disk /dev/mmcblk1: 233 cylinders, 255 heads, 63 sectors/track
+Feb 23 20:33:51 beaglebone emmc.sh[123]: sfdisk: ERROR: sector 3069071360 does not have an msdos signature
+Feb 23 20:33:53 beaglebone emmc.sh[123]: sfdisk:  /dev/mmcblk1: unrecognized partition table type
+Feb 23 20:33:56 beaglebone emmc.sh[123]: sfdisk: No partitions found
+Feb 23 20:33:56 beaglebone emmc.sh[123]: Old situation:
+Feb 23 20:33:56 beaglebone emmc.sh[123]: New situation:
+Feb 23 20:33:56 beaglebone emmc.sh[123]: Units = cylinders of 8225280 bytes, blocks of 1024 bytes, counting from 0
+Feb 23 20:33:56 beaglebone emmc.sh[123]: Device Boot Start     End   #cyls    #blocks   Id  System
+Feb 23 20:33:56 beaglebone emmc.sh[123]: /dev/mmcblk1p1   *      0+      8       9-     72261    c  W95 FAT32 (LBA)
+Feb 23 20:33:56 beaglebone emmc.sh[123]: /dev/mmcblk1p2          9     232     224    1799280   83  Linux
+Feb 23 20:33:56 beaglebone emmc.sh[123]: /dev/mmcblk1p3          0       -       0          0    0  Empty
+Feb 23 20:33:56 beaglebone emmc.sh[123]: /dev/mmcblk1p4          0       -       0          0    0  Empty
+Feb 23 20:33:56 beaglebone emmc.sh[123]: Successfully wrote the new partition table
+Feb 23 20:33:56 beaglebone emmc.sh[123]: Re-reading the partition table ...
+Feb 23 20:34:00 beaglebone emmc.sh[123]: If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+Feb 23 20:34:01 beaglebone emmc.sh[123]: to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+Feb 23 20:34:01 beaglebone emmc.sh[123]: (See fdisk(8).)
+Feb 23 20:34:03 beaglebone emmc.sh[123]: ./mkcard.sh: line 38: kpartx: command not found
+Feb 23 20:34:03 beaglebone emmc.sh[123]: umount: /dev/mmcblk1p1: not mounted
+Feb 23 20:34:03 beaglebone emmc.sh[123]: mkfs.vfat 2.11 (12 Mar 2005)           
+Feb 23 20:34:03 beaglebone emmc.sh[123]: umount: /dev/mmcblk1p2: not mounted    
+Feb 23 20:34:03 beaglebone emmc.sh[123]: mke2fs 1.42.1 (17-Feb-2012)            
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Discarding device blocks: done         
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Filesystem label=Angstrom
+Feb 23 20:34:08 beaglebone emmc.sh[123]: OS type: Linux
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Block size=4096 (log=2)
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Fragment size=4096 (log=2)
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Stride=0 blocks, Stripe width=0 blocks
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 112672 inodes, 449820 blocks
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 22491 blocks (5.00%) reserved for the super user
+Feb 23 20:34:08 beaglebone emmc.sh[123]: First data block=0
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Maximum filesystem blocks=461373440
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 14 block groups
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 32768 blocks per group, 32768 fragments per group
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 8048 inodes per group
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Superblock backups stored on blocks:
+Feb 23 20:34:08 beaglebone emmc.sh[123]: 32768, 98304, 163840, 229376, 294912
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Allocating group tables: done 
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Writing inode tables: done 
+Feb 23 20:34:08 beaglebone emmc.sh[123]: Creating journal (8192 blocks): done
+Feb 23 20:34:17 beaglebone emmc.sh[123]: Writing superblocks and filesystem accounting information: done 
+Feb 23 20:34:18 beaglebone emmc.sh[123]: ./mkcard.sh: line 82: kpartx: command not found
+Feb 23 20:34:18 beaglebone emmc.sh[123]: Mounting partitions
+Feb 23 20:34:18 beaglebone emmc.sh[123]: Copying bootloader files
+Feb 23 20:34:31 beaglebone emmc.sh[123]: Extracting rootfs
+Feb 23 20:35:51 beaglebone emmc.sh[123]: Populating VFAT partition
+Feb 23 20:35:56 beaglebone emmc.sh[123]: Generating machine ID
+Feb 23 20:35:56 beaglebone emmc.sh[123]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 23 20:35:58 beaglebone emmc.sh[123]: Initializing machine ID from random generator.
+Feb 23 20:36:00 beaglebone emmc.sh[123]: Running Postinsts
+Feb 23 20:36:00 beaglebone emmc.sh[123]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 23 20:36:02 beaglebone emmc.sh[123]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 23 20:36:05 beaglebone emmc.sh[123]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 23 20:36:06 beaglebone emmc.sh[123]: No packages removed.
+Feb 23 20:36:06 beaglebone emmc.sh[123]: ln: /media/2/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service: File exists
+Feb 23 20:36:32 beaglebone emmc.sh[123]: ID.txt found
+Feb 23 20:36:32 beaglebone emmc.sh[123]: START.htm missing - ERROR
+Feb 23 20:36:34 beaglebone emmc.sh[123]: 100000+0 records in
+Feb 23 20:36:34 beaglebone emmc.sh[123]: 100000+0 records out
+Feb 23 20:36:34 beaglebone emmc.sh[123]: /usr/bin/emmc.sh: line 182: /sys/class/leds/beaglebone:green:heartbeat/trigger: No such filey
+Feb 23 20:36:34 beaglebone emmc.sh[123]: /usr/bin/emmc.sh: line 183: /sys/class/leds/beaglebone:green:mmc0/trigger: No such file or dy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Feb 24 17:51:29 beaglebone emmc.sh[141]: Valid EEPROM header found
+Feb 24 17:51:29 beaglebone emmc.sh[141]: Zeroing eMMC
+Feb 24 17:51:35 beaglebone emmc.sh[141]: 16+0 records in
+Feb 24 17:51:35 beaglebone emmc.sh[141]: 16+0 records out
+Feb 24 17:51:35 beaglebone emmc.sh[141]: Partitioning eMMC
+Feb 24 17:51:36 beaglebone emmc.sh[141]: 1+0 records in
+Feb 24 17:51:36 beaglebone emmc.sh[141]: 1+0 records out
+Feb 24 17:51:36 beaglebone emmc.sh[141]: DISK SIZE - 1920991232 bytes
+Feb 24 17:51:36 beaglebone emmc.sh[141]: CYLINDERS - 233
+Feb 24 17:51:36 beaglebone emmc.sh[141]: Checking that no-one is using this disk right now ...
+Feb 24 17:51:36 beaglebone emmc.sh[141]: OK
+Feb 24 17:51:36 beaglebone emmc.sh[141]: Disk /dev/mmcblk1: 233 cylinders, 255 heads, 63 sectors/track
+Feb 24 17:51:36 beaglebone emmc.sh[141]: sfdisk: ERROR: sector 3069829120 does not have an msdos signature
+Feb 24 17:51:36 beaglebone emmc.sh[141]: sfdisk:  /dev/mmcblk1: unrecognized partition table type
+Feb 24 17:51:36 beaglebone emmc.sh[141]: sfdisk: No partitions found
+Feb 24 17:51:36 beaglebone emmc.sh[141]: Old situation:
+Feb 24 17:51:42 beaglebone emmc.sh[141]: New situation:
+Feb 24 17:51:42 beaglebone emmc.sh[141]: Units = cylinders of 8225280 bytes, blocks of 1024 bytes, counting from 0
+Feb 24 17:51:42 beaglebone emmc.sh[141]: Device Boot Start     End   #cyls    #blocks   Id  System
+Feb 24 17:51:42 beaglebone emmc.sh[141]: /dev/mmcblk1p1   *      0+      8       9-     72261    c  W95 FAT32 (LBA)
+Feb 24 17:51:42 beaglebone emmc.sh[141]: /dev/mmcblk1p2          9     232     224    1799280   83  Linux
+Feb 24 17:51:42 beaglebone emmc.sh[141]: /dev/mmcblk1p3          0       -       0          0    0  Empty
+Feb 24 17:51:42 beaglebone emmc.sh[141]: /dev/mmcblk1p4          0       -       0          0    0  Empty
+Feb 24 17:51:42 beaglebone emmc.sh[141]: Successfully wrote the new partition table
+Feb 24 17:51:42 beaglebone emmc.sh[141]: Re-reading the partition table ...
+Feb 24 17:51:46 beaglebone emmc.sh[141]: If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+Feb 24 17:51:46 beaglebone emmc.sh[141]: to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+Feb 24 17:51:46 beaglebone emmc.sh[141]: (See fdisk(8).)
+Feb 24 17:51:52 beaglebone emmc.sh[141]: ./mkcard.sh: line 38: kpartx: command not found
+Feb 24 17:51:52 beaglebone emmc.sh[141]: umount: /dev/mmcblk1p1: not mounted
+Feb 24 17:51:52 beaglebone emmc.sh[141]: mkfs.vfat 2.11 (12 Mar 2005)
+Feb 24 17:51:52 beaglebone emmc.sh[141]: umount: /dev/mmcblk1p2: not mounted
+Feb 24 17:51:52 beaglebone emmc.sh[141]: mke2fs 1.42.1 (17-Feb-2012)
+Feb 24 17:51:58 beaglebone emmc.sh[141]: [82B blob data]
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Filesystem label=Angstrom
+Feb 24 17:51:58 beaglebone emmc.sh[141]: OS type: Linux
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Block size=4096 (log=2)
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Fragment size=4096 (log=2)
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Stride=0 blocks, Stripe width=0 blocks
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 112672 inodes, 449820 blocks
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 22491 blocks (5.00%) reserved for the super user
+Feb 24 17:51:58 beaglebone emmc.sh[141]: First data block=0
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Maximum filesystem blocks=461373440
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 14 block groups
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 32768 blocks per group, 32768 fragments per group
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 8048 inodes per group
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Superblock backups stored on blocks:
+Feb 24 17:51:58 beaglebone emmc.sh[141]: 32768, 98304, 163840, 229376, 294912
+Feb 24 17:51:58 beaglebone emmc.sh[141]: [179B blob data]
+Feb 24 17:51:58 beaglebone emmc.sh[141]: [176B blob data]
+Feb 24 17:51:58 beaglebone emmc.sh[141]: Creating journal (8192 blocks): done
+Feb 24 17:52:07 beaglebone emmc.sh[141]: [213B blob data]
+Feb 24 17:52:08 beaglebone emmc.sh[141]: ./mkcard.sh: line 82: kpartx: command not found
+Feb 24 17:52:08 beaglebone emmc.sh[141]: Mounting partitions
+Feb 24 17:52:08 beaglebone emmc.sh[141]: Copying bootloader files
+Feb 24 17:52:23 beaglebone emmc.sh[141]: Extracting rootfs
+Feb 24 17:54:03 beaglebone emmc.sh[141]: Populating VFAT partition
+Feb 24 17:54:07 beaglebone emmc.sh[141]: Generating machine ID
+Feb 24 17:54:07 beaglebone emmc.sh[141]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 24 17:54:10 beaglebone emmc.sh[141]: Initializing machine ID from random generator.
+Feb 24 17:54:10 beaglebone emmc.sh[141]: Running Postinsts
+Feb 24 17:54:10 beaglebone emmc.sh[141]: Error setting new values. Common errors:
+Feb 24 17:54:10 beaglebone emmc.sh[141]: - Do you have proper administration rights? (super-user?)
+Feb 24 17:54:10 beaglebone emmc.sh[141]: - Is the governor you requested available and modprobed?
+Feb 24 17:54:10 beaglebone emmc.sh[141]: - Trying to set an invalid policy?
+Feb 24 17:54:10 beaglebone emmc.sh[141]: - Trying to set a specific frequency, but userspace governor is not available,
+Feb 24 17:54:10 beaglebone emmc.sh[141]: for example because of hardware which cannot be set to a specific frequency
+Feb 24 17:54:10 beaglebone emmc.sh[141]: or because the userspace governor isn't loaded?
+Feb 24 17:54:10 beaglebone emmc.sh[141]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 24 17:54:12 beaglebone emmc.sh[141]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 24 17:54:14 beaglebone emmc.sh[141]: Error setting new values. Common errors:
+Feb 24 17:54:15 beaglebone emmc.sh[141]: - Do you have proper administration rights? (super-user?)
+Feb 24 17:54:15 beaglebone emmc.sh[141]: - Is the governor you requested available and modprobed?
+Feb 24 17:54:15 beaglebone emmc.sh[141]: - Trying to set an invalid policy?
+Feb 24 17:54:15 beaglebone emmc.sh[141]: - Trying to set a specific frequency, but userspace governor is not available,
+Feb 24 17:54:15 beaglebone emmc.sh[141]: for example because of hardware which cannot be set to a specific frequency
+Feb 24 17:54:15 beaglebone emmc.sh[141]: or because the userspace governor isn't loaded?
+Feb 24 17:54:15 beaglebone emmc.sh[141]: Spawning namespace container on /media/2 (console is /dev/pts/0).
+Feb 24 17:54:15 beaglebone emmc.sh[141]: No packages removed.
+Feb 24 17:54:36 beaglebone emmc.sh[141]: ID.txt found
+Feb 24 17:54:36 beaglebone emmc.sh[141]: START.htm missing - ERROR
+Feb 24 17:54:38 beaglebone emmc.sh[141]: 100000+0 records in
+Feb 24 17:54:38 beaglebone emmc.sh[141]: 100000+0 records out
+
+
