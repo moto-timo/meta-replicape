@@ -26,22 +26,30 @@ BSP-layer:
 Todo: 
 - USB babble interrupt occured. (added a patch, not tested) 
   - CAUTION: musb: Babble Interrupt Occurred  - still happening on hotplug
-- Octoprint internal server error. Works on 192.168.7.2, not 10.24.2.90
-- Octoprint is not enabled
-  - Perhaps something with avahi? 
-  
-- reposition the frog
+- Toggle: reposition the frog
+- Add task-native-sdk? 
+
 - Failed at step EXEC spawning /usr/lib/connman/wired-setup: No such file or directory
-- Modules were missing. Adding "kernel-modules" to image. Is this necessary?
-- Date not set properly 
-  - trying to change ntpserver in /etc/default/ntpdate
-  - Installed ntp
-  - fixed the setting according to derrek molloys blog-post
 - CPU-freq not set properly
 - can't open '/var/lib/misc/udhcpd.leases': No such file or directory 
   - touch /var/lib/misc/udhcpd.leases
 - iptables support missing error 2 (No such file or directory)
   - opkg upgrade iptables
+
+Add:
+- Lighttpd
+- web.py
+- python-sqlite3
+- sqlite3
+- flup
+
+Add the following libraries: libgirepository-1.0-1 python-pygobject pango-dev libatk-1.0-dev 
+
+Staged: 
+- Add Make
+- Add wget
+- Add binutils
+- Add Python-dev
 
 Done: 
 - Change hostname to thing (from emmc.sh?) (ok)
@@ -61,6 +69,12 @@ Done:
 - emmc script does not complete right.
 - g_multi does not load (ok, added usb_f_eem)
 - Changed the script on pvr so there is no .sh any more. 
+- Date not set properly 
+- Modules were missing. Adding "kernel-modules" to image. Is this necessary?
+
+
+
+
 
 Remember (Will eventually be a part of recipes): 
 - Compiling toggle: add the "-B 0x100000" argument to the build/tmp-angstrom_v2013_06-eglibc/sysroots/beaglebone/usr/bin/crossscripts/qemuwrapper

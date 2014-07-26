@@ -8,6 +8,7 @@ serial port driver for Linux. This creates virtual tty port pairs and uses \
 any pair to connect one tty serial port based application to another. \
 There is a version using pseudo-terminal (UNIX 98 style). \
 "
+
 SRC_URI += " \
     file://0004-use-fprint.patch \
     file://0002-Add-tty0tty.sh.patch \

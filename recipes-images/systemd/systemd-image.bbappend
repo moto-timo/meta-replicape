@@ -9,7 +9,6 @@ IMAGE_INSTALL += " \
     kernel-module-bb-sgx \
     bb-sgx \
     bb-sgx-dev \
-    nano \
     replicape-device-tree \
     python-numpy \
     kernel-module-uio-pruss \
@@ -26,6 +25,13 @@ IMAGE_INSTALL += " \
     kernel-modules \
     less \
     gcc \
+    binutils \
+    make \
+    nano \
+    wget \
+    python-dev \
+    coreutils \
+    lighttpd \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"
