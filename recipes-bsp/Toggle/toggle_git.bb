@@ -18,7 +18,7 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 
 S = "${WORKDIR}/git"
 
-DEPENDS_${PN} = " \
+DEPENDS += " \
     clutter \
     mx \
     mash \

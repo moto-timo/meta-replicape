@@ -1,3 +1,5 @@
+require recipes-images/angstrom/systemd-image.bb
+
 IMAGE_INSTALL += " \
     pasm \
     redeem \
@@ -41,6 +43,8 @@ IMAGE_INSTALL += " \
     lighttpd-module-rewrite \
     lighttpd-module-alias \
     python-sqlite3 \
+    connman-client \
+    crda \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

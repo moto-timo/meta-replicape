@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 inherit kernel siteinfo machine_kernel_pr
 
+require recipes-kernel/linux/linux-dtb.inc
+
 # Enable OABI compat for people stuck with obsolete userspace
 ARM_KEEP_OABI ?= "1"
 
@@ -49,6 +51,15 @@ KERNEL_DEVICETREE_p2020ds = "arch/${ARCH}/boot/dts/p2020ds.dts"
 KERNEL_DEVICETREE_sequoia = "arch/${ARCH}/boot/dts/sequoia.dts"
 KERNEL_DEVICETREE_tqm8540 = "arch/${ARCH}/boot/dts/tqm8540.dts"
 KERNEL_DEVICETREE_xilinx-ml507 = "arch/${ARCH}/boot/dts/virtex440-ml507.dts"
+
+# Default is to package all dtb files for ti33x devices unless building
+# for the specific beaglebone machine.
+#KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+#KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
+#KERNEL_DEVICETREE_beaglebone = "arch/${ARCH}/boot/dts/am335x-boneblack.dtb"
+#KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+#KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
+
 
 KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
 

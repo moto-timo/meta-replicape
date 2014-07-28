@@ -85,5 +85,3 @@ fatal error: glib-object.h: No such file or directory
 Added this to the mash_git recipe. CFLAGS_prepend = "-I/usr/include/glib-2.0 "
 
 
-
-

@@ -53,7 +53,7 @@ do_configure_prepend(){
 
 do_compile(){
 	cp ${S}/Rules.make.dist ${S}/Rules.make
-	sed -i -e 's:@@HOME@@:/home/iagent:' ${S}/Rules.make
+	sed -i -e 's:@@HOME@@:/home/elias:' ${S}/Rules.make
 	sed -i -e 's:@@CSTOOL_DIR@@:${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/:' ${S}/Rules.make
 	sed -i -e 's:@@CSTOOL_PREFIX@@:arm-angstrom-linux-gnueabi-:' ${S}/Rules.make
 	sed -i -e 's:@@KERNEL_INSTALL_DIR@@:${STAGING_KERNEL_DIR}:' ${S}/Rules.make
@@ -62,7 +62,7 @@ do_compile(){
 
 	make all
     
-    dtc -O dtb -o BB-SGX-00A0.dtbo -b 0 -@ BB-SGX-00A0.dts
+    dtc -O dtb -o BB-SGX-00A0.dtbo -b 0 -@ -I BB-SGX-00A0.dts
 }
 
 do_install(){
