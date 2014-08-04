@@ -3,7 +3,7 @@ HOMEPAGE = "http://octoprint.org"
 
 SECTION = "devel/python"
 
-LICENSE = "AGPLv3"
+LICENSE = "AGPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=73f1eb20517c55bf9493b7dd6e480788"
 
 SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9"

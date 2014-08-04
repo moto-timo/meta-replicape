@@ -232,6 +232,13 @@ do_configure_prepend() {
 	                -i '${S}/.config'
 	    echo 'CONFIG_RESET_TI=y' >> ${S}/.config
 
+        # Enable DA8XX
+		sed -e /CONFIG_FB_CFB_REV_PIXELS_IN_BYTE/d \
+			-e /CONFIG_FB_DA8XX/d \
+	                -i '${S}/.config'
+	    echo 'CONFIG_FB_DA8XX=y' >> ${S}/.config
+	    echo 'CONFIG_FB_CFB_REV_PIXELS_IN_BYTE=y' >> ${S}/.config
+
 		yes '' | oe_runmake oldconfig
 }
 
@@ -265,6 +272,8 @@ FILES_kernel-devicetrees += "/boot/*.dtb"
 
 RDEPENDS_kernel-image_append = " kernel-devicetrees"
 RRECOMMENDS_kernel-image_append = " kernel-devicetree-overlays"
+
+KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
 
 do_devicetree_image() {
     if test -n "${KERNEL_DEVICETREE}" ; then

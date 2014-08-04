@@ -5,14 +5,14 @@
 
 export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
 
-FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2013.06-beaglebone.rootfs.tar.xz"
+FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2014.06-beaglebone.rootfs.tar.xz"
 PART1MOUNT="/media/1"
 PART2MOUNT="/media/2"
 
 HOSTARCH="$(uname -m)"
 
-MLOMD5="MD5MLO"
-UBOOTMD5="MD5UBOOT"
+MLOMD5="992228bb0b6719905246b7b9fa6d3cb8"
+UBOOTMD5="28141911ee2eefda727ac06a178183bf"
 
 cd /build
 
@@ -46,7 +46,7 @@ mount /dev/mmcblk1p2 ${PART2MOUNT} -o async,noatime
 
 echo "Copying bootloader files"
 cp MLO u-boot.img ${PART1MOUNT}
-echo "optargs=drm.debug=7 capemgr.enable_partno=BB-SGX consoleblank=0 vt.global_cursor_default=0" > ${PART1MOUNT}/uEnv.txt
+echo "optargs=drm.debug=7 consoleblank=0 vt.global_cursor_default=0 mtdoops.mtddev=2" > ${PART1MOUNT}/uEnv.txt
 
 umount /dev/mmcblk1p1
 
@@ -62,13 +62,14 @@ if [ -d ${PART2MOUNT}/usr/share/beaglebone-getting-started ] ; then
 fi
 
 # Add ID and dogtag
-echo "Systemd Thing Image DATE" > ${PART1MOUNT}/ID.txt
-echo "Systemd Thing Image DATE" > ${PART2MOUNT}/etc/dogtag
+echo "Systemd Thing Image 2014.07.31" > ${PART1MOUNT}/ID.txt
+echo "Systemd Thing Image 2014.07.31" > ${PART2MOUNT}/etc/dogtag
+echo -e "NAME=Thing\nID=thing\nPRETTY_NAME=The Thing\nANSI_COLOR=1;35" > ${PART2MOUNT}/etc/os-release
 # Set hostname 
 echo "thing" > ${PART2MOUNT}/etc/hostname
 # Add thing package feeds
-echo "src/gz replicape-base http://feeds.thing-printer.com/feeds/v2013.06/ipk/eglibc/armv7ahf-vfp-neon/machine/beaglebone" > ${PART2MOUNT}/etc/opkg/replicape-base.conf
-echo "src/gz replicape-beaglebone http://feeds.thing-printer.com/feeds/v2013.06/ipk/eglibc/beaglebone" > ${PART2MOUNT}/etc/opkg/replicape-beaglebone.conf
+echo "src/gz replicape-base http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/armv7at2hf-vfp-neon/machine/beaglebone" > ${PART2MOUNT}/etc/opkg/replicape-base.conf
+echo "src/gz replicape-beaglebone http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/beaglebone" > ${PART2MOUNT}/etc/opkg/replicape-beaglebone.conf
 
 umount /dev/mmcblk1p1
 
@@ -105,8 +106,8 @@ rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/getty@tty1.service
 rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service
 
 # link libprussdrv.so to libprussdrv.so.1
-cd ${PART2MOUNT}/usr/lib/
-ln -s libprussdrv.so.1 libprussdrv.so
+#cd ${PART2MOUNT}/usr/lib/
+#ln -s libprussdrv.so.1 libprussdrv.so
 
 touch ${PART2MOUNT}/etc/default/locale
 

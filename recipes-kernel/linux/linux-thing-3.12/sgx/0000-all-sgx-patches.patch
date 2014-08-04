@@ -19,7 +19,7 @@ index 8aabaa0..d930805 100644
 +			reg = <0x56000000 0x1000000>;
 +			interrupts = <37>;
 +			resets = <&prcm 0>;
-+			status = "disabled";
++			status = "okay";
 +		};
  	};
  };

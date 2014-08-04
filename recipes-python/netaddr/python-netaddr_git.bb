@@ -4,10 +4,10 @@ SECTION = "devel/python"
 HOMEPAGE = "https://pypi.python.org/pypi/netaddr/"
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e4ee508e838b58bfd618ebc4ef9ba371"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e0c5cc28e66c19626bc908b3a9402c2e"
 
-SRC_URI = "git://github.com/drkjam/netaddr.git;protocol=https"
-SRCREV = "f64ae19e533ffa5522dcba1fc833975cb2ee88a5"
+SRC_URI = "git://github.com/drkjam/netaddr.git;protocol=https;branch=rel-0.7.x"
+SRCREV = "21587e22a5436935aaf887c41fba6c5e61f55276"
 
 S = "${WORKDIR}/git"
 

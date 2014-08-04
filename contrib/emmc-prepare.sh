@@ -1,12 +1,12 @@
 #!/bin/sh
 
 #IMAGE=$1
-IMAGE="BBB-eMMC-flasher-v2013.06.img"
+IMAGE="BBB-eMMC-flasher-v2014-06.img"
 
 DEPLOYDIR="deploy/eglibc/images/beaglebone/"
 MOUNTPOINT="/media/2"
 MOUNTPOINT1="/media/1"
-FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2013.06-beaglebone.rootfs.tar.xz"
+FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2014.06-beaglebone.rootfs.tar.xz"
 SCRATCHDIR=`pwd`
 BGIMAGE="thing.jpg"
 
@@ -31,7 +31,6 @@ fi
 
 echo "Trying to attach image file "
 LOOPFILE="$(kpartx -a -v ${IMAGENAME} | grep /dev | grep p2 | tail -n1 | awk '{print $8}' | sed s:/dev/::)"
-
 echo "Loopdev: ${LOOPFILE}"
 
 sleep 1

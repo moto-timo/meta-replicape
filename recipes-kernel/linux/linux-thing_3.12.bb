@@ -17,6 +17,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     kernel-module-usb-f-ecm \
     kernel-module-usb-f-acm \
     kernel-module-u-serial \
+    kernel-module-g-multi \
 "
 
 S = "${WORKDIR}/git"
@@ -101,6 +102,7 @@ SRC_URI += " \
 	file://cape-import/0001-capes-import-from-3.8.patch \
 	file://sgx/0000-all-sgx-patches.patch \
 	file://sgx/0001-sgx-add-reset.patch \
+    file://sgx/0003-hack-port-da8xx-changes-from-ti-3.12-repo.patch \
 	file://pru/0000-add-pruss-to-device-tree.patch \
 	file://pru/0001-add-pruss-to-kconfig.patch \
 	file://pru/0002-make-uio-pruss-dt-comaptible.patch \

@@ -1,9 +1,9 @@
 include redeem.inc
 
 SRC_URI = "git://bitbucket.org/intelligentagent/redeem.git;protocol=https"
-SRCREV = "c92233ed047da8b50d5aed4aca16fa9a2313d543"
+SRCREV = "edf08f7c4cf125b30c6ebe38a9ddbee100bc3ef7"
 
-LICENSE = "CC-BY-SA-2.0"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d91509a59f42bb5341a8af8295f28211"
 
 DEPENDS += "swig-native"
