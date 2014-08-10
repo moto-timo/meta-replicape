@@ -10,9 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
 
 inherit autotools pkgconfig gtk-doc gettext g-ir
 
-CFLAGS_prepend = "-I${STAGING_DIR_NATIVE}/usr/include/glib-2.0 "
-GIR_EXTRA_SCANNER_ARGS += " --libtool "
-#GIR_EXTRA_LIBS_PATH = "./.libs"
+DEPENDS += " cogl-1.0 clutter-1.0 "
+
+CFLAGS_prepend = "-I${STAGING_DIR_NATIVE}/usr/include/glib-2.0 -L${STAGING_DIR_NATIVE}/usr/lib/glib-2.0 "
+GIR_EXTRA_SCANNER_ARGS += " --libtool=${STAGING_DIR_TARGET}/usr/bin/crossscripts/arm-angstrom-linux-gnueabi-libtool "
 
 #FILES_${PN} += " \
 #  /usr/share \

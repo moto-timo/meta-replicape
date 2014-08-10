@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=243b725d71bb5df4a1e5920b344b86ad \
 
 PR = "r1"
 
-DEPENDS = "clutter-1.0 dbus-glib gdk-pixbuf startup-notification gtk-doc"
+DEPENDS = "dbus-glib gdk-pixbuf startup-notification gtk-doc clutter-1.0"
 
 inherit autotools gettext g-ir
 

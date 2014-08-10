@@ -42,6 +42,19 @@ IMAGE_INSTALL += " \
     libgles-omap3 \    
     dtc \
     ca-certificates \
+    libevdev \
+    libinput \
+    packagegroup-gnome-fonts \
+    kernel-modules \
+    libgirepository \ 
+    python-pygobject \ 
+    pango-gir \ 
+    json-glib-gir \
+    mash-gir \
+    cogl-1.0-gir \
+    clutter-1.0-gir \
+    atk-gir \
+    gdk-pixbuf-gir \
 "
 
 export IMAGE_BASENAME = "systemd-thing-image"

@@ -18,6 +18,8 @@ COMPATIBLE_MACHINE = "(beaglebone)"
 
 S = "${WORKDIR}/git"
 
+PREFERRED_VERSION_cogl-1.0 = "1.19.2"
+
 DEPENDS += " \
     clutter-1.0 \
     mx \

@@ -18,7 +18,7 @@ new file mode 100644
 index 0000000..ee8508c
 --- /dev/null
 +++ b/drivers/misc/cape/beaglebone/capemgr.c
-@@ -0,0 +1,1835 @@
+@@ -0,0 +1,1836 @@
 +/*
 + * TI Beaglebone cape controller
 + *
@@ -836,6 +836,7 @@ index 0000000..ee8508c
 +	for (i = 0; i < slot->ee_attrs_count; i++) {
 +		ee_attr = &slot->ee_attrs[i];
 +		ee_attr->slot = slot;
++       sysfs_attr_init(&ee_attr->devattr.attr);
 +		attrgroup->attrs[i] = &ee_attr->devattr.attr;
 +	}
 +	attrgroup->attrs[i] = NULL;

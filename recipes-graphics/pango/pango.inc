@@ -10,17 +10,17 @@ SECTION = "libs"
 LICENSE = "LGPLv2.0+"
 
 X11DEPENDS = "virtual/libx11 libxft"
-DEPENDS = "glib-2.0 fontconfig freetype zlib virtual/libiconv cairo elfutils harfbuzz libpng"
+DEPENDS = "glib-2.0 fontconfig freetype zlib virtual/libiconv cairo harfbuzz qemu-native"
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-PACKAGECONFIG[x11] = "--with-x,--without-x,${X11DEPENDS}"
+PACKAGECONFIG[x11] = "--with-xft,--without-xft,${X11DEPENDS}"
 
 BBCLASSEXTEND = "native"
 DEPENDS_class-native = "glib-2.0-native cairo-native harfbuzz-native"
 
 PACKAGES_DYNAMIC += "^pango-module-.*"
 
-RRECOMMENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'x11', 'pango-module-basic-x', '', d)} pango-module-basic-fc" 
+RRECOMMENDS_${PN} = "pango-module-basic-fc"
 
 inherit gnomebase gtk-doc qemu
 # Create a pango-modules package
@@ -34,8 +34,7 @@ EXTRA_AUTORECONF = ""
 # seems to go wrong with default cflags
 FULL_OPTIMIZATION_arm = "-O2"
 
-EXTRA_OECONF = "--disable-glibtest \
-		--enable-introspection \
+EXTRA_OECONF = "--disable-introspection \
 		--enable-explicit-deps=no \
 	        --disable-debug \
 	        --with-mlprefix=${MLPREFIX}"
@@ -61,17 +60,6 @@ if [ "x$D" != "x" ]; then
 fi
 }
 
-#do_configure_append() {
-#	sed -i -e 's:INTROSPECTION_COMPILER = /usr/bin/g-ir-compiler:INTROSPECTION_COMPILER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-compiler:g' ${S}/../build/#Makefile	
-#	sed -i -e 's:INTROSPECTION_MAKEFILE = /usr/share/gobject-introspection-1.0/Makefile.introspection:INTROSPECTION_MAKEFILE = ${STAGING_DIR_TARGET}/usr/share/gobject-introspection-1.0/#Makefile.introspection:' ${S}/../build/Makefile	
-#	sed -i -e 's:INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner:INTROSPECTION_SCANNER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner:' ${S}/../build/Makefile 
-#
-#	sed -i -e 's:INTROSPECTION_COMPILER = /usr/bin/g-ir-compiler:INTROSPECTION_COMPILER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-compiler:g' ${S}/../build/pango/#Makefile	
-#	sed -i -e 's:INTROSPECTION_MAKEFILE = /usr/share/gobject-introspection-1.0/Makefile.introspection:INTROSPECTION_MAKEFILE = ${STAGING_DIR_TARGET}/usr/share/gobject-introspection-1.0/#Makefile.introspection:' ${S}/../build/pango/Makefile	
-#	sed -i -e 's:INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner:INTROSPECTION_SCANNER = ${STAGING_DIR_NATIVE}/usr/bin/armv7ahf-vfp-neon-angstrom-linux-gnueabi/g-ir-scanner:' ${S}/../build/pango/#Makefile 
-#}
-
-
 do_install_append () {
 	if [ "${MLPREFIX}" != "" ]; then
 		mv ${D}/${bindir}/pango-querymodules ${D}/${bindir}/${MLPREFIX}pango-querymodules 
@@ -89,17 +77,4 @@ python populate_packages_prepend () {
 
 FILES_${PN} = "${sysconfdir}/pango/* ${bindir}/* ${libdir}/libpango*${SOLIBS}"
 FILES_${PN}-dbg += "${libdir}/pango/${LIBV}/modules/.debug"
-FILES_${PN}-dev += "${libdir}/pango/${LIBV}/modules/*.la \
-  /usr/share/gir-1.0 \
-  /usr/share/gir-1.0/PangoCairo-1.0.gir \
-  /usr/share/gir-1.0/Pango-1.0.gir \
-  /usr/share/gir-1.0/PangoXft-1.0.gir \
-  /usr/share/gir-1.0/PangoFT2-1.0.gir \
-  /usr/lib/girepository-1.0 \
-  /usr/lib/girepository-1.0/PangoCairo-1.0.typelib \
-  /usr/lib/girepository-1.0/PangoXft-1.0.typelib \
-  /usr/lib/girepository-1.0/Pango-1.0.typelib \
-  /usr/lib/girepository-1.0/PangoFT2-1.0.typelib \
-"
-
-
+FILES_${PN}-dev += "${libdir}/pango/${LIBV}/modules/*.la"

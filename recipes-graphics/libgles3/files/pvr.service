@@ -1,0 +1,12 @@
+[Unit]
+Description=The PowerVR SGX530 3D engine
+
+[Service]
+Type=oneshot
+ExecStart=/lib/systemd/scripts/pvr-init start
+ExecStop=/lib/systemd/scripts/pvr-init stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=basic.target
+

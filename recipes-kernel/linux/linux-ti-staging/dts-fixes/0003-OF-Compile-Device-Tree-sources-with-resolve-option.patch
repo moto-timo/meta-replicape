@@ -15,7 +15,8 @@ Signed-off-by: Pantelis Antoniou <panto@antoniou-consulting.com>
 ---
  arch/arm/Makefile      | 6 +++++-
  arch/arm/boot/Makefile | 4 ++++
- 2 files changed, 9 insertions(+), 1 deletion(-)
+ scripts/Makefile.lib
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
 index cd87948..d1fae1e 100644
@@ -56,6 +57,21 @@ index 4359029..ee6d0b2 100644
  ifneq ($(LOADADDR),)
    UIMAGE_LOADADDR=$(LOADADDR)
  else
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 79c059e..efa7371 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -244,6 +244,10 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
+ # DTC
+ # ---------------------------------------------------------------------------
+ 
++ifeq ($(CONFIG_OF_RESOLVE),y)
++DTC_FLAGS += -@
++endif
++
+ # Generate an assembly file to wrap the output of the device tree compiler
+ quiet_cmd_dt_S_dtb= DTB     $@
+ cmd_dt_S_dtb=                              
 -- 
 1.9.1
 
