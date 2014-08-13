@@ -23,6 +23,8 @@ Graphics:
   * Cogl-1.8.2
   * Mx-2.0
   * Mash-0.2
+  * GdkPixbuf 
+
 
 Introspection:
 All the grahics packages have been compiled with introspection, 
@@ -31,29 +33,26 @@ There is no window system. (--enable-egl-null)
 Backend to clutter is evdev/libinput
 
 
+Add: 
+ - libtool
+ - libgirepository-1.0-dev
+ - libclutter-1.0-dev
+
 Todo: 
-- Remove Angstrom package feeds
-- Get Python code to compile out of the box
-
-
-- USB babble interrupt occured. (added a patch, not tested) 
-  - CAUTION: musb: Babble Interrupt Occurred  - still happening on hotplug
 - Toggle: reposition the frog
 - Add task-native-sdk? 
 
+Staged: 
+
+Wontfix:
+- USB babble interrupt occured. (added a patch, not tested) 
+  - CAUTION: musb: Babble Interrupt Occurred  - still happening on hotplug
 - Failed at step EXEC spawning /usr/lib/connman/wired-setup: No such file or directory
 - CPU-freq not set properly
 - can't open '/var/lib/misc/udhcpd.leases': No such file or directory 
   - touch /var/lib/misc/udhcpd.leases
 - iptables support missing error 2 (No such file or directory)
   - opkg upgrade iptables
-
-Add:
-
-Add the following libraries: 
-
-Staged: 
-
 
 
 Done: 
@@ -88,17 +87,13 @@ v2014.06:
 - flup
 - Switched from BB-SGX to libgles-omap3
 - Added capemgr to Kernel 3.14
+- USB gadget serial not available as /dev/ttyGS0
+- Get Python/Clutter code to compile out of the box
+
 
 Remember (Will eventually be a part of recipes): 
 - If you get this error when compiling Mash: 
 fatal error: glib-object.h: No such file or directory
 Added this to the mash_git recipe. CFLAGS_prepend = "-I/usr/include/glib-2.0 "
-
-Also for Mash, Python error: OSError: No such file or directory
-This is since util.libtool_path returns "-v"
-
-
-        if libtool_path.split(' ') == "-v":
-            return['libtool']
 
 

@@ -1,0 +1,10 @@
+[Unit]
+Description=USB Ethernet gadgets (g_serial, g_ether, g_mass_storage)
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/usr/bin/g-multi-load.sh
+ExecStop=/sbin/rmmod g_multi
+
+[Install]
+WantedBy=basic.target

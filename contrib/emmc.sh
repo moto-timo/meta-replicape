@@ -68,8 +68,8 @@ echo -e "NAME=Thing\nID=thing\nPRETTY_NAME=The Thing\nANSI_COLOR=1;35" > ${PART2
 # Set hostname 
 echo "thing" > ${PART2MOUNT}/etc/hostname
 # Add thing package feeds
-echo "src/gz base http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/armv7at2hf-vfp-neon/machine/beaglebone" > ${PART2MOUNT}/etc/opkg/base-feed.conf
-echo "src/gz beaglebone http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/beaglebone" > ${PART2MOUNT}/etc/opkg/beaglebone-feed.conf
+echo "src/gz thing-base http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/armv7at2hf-vfp-neon/machine/beaglebone" > ${PART2MOUNT}/etc/opkg/thing-base-feed.conf
+echo "src/gz thing-beaglebone http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/beaglebone" > ${PART2MOUNT}/etc/opkg/thing-beaglebone-feed.conf
 
 umount /dev/mmcblk1p1
 

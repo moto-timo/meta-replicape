@@ -4,7 +4,7 @@ After=ntpd.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/octoprint --iknowwhatimdoing --config /etc/octoprint/config.yaml
+ExecStart=/usr/bin/octoprint.run --iknowwhatimdoing --config /etc/octoprint/config.yaml
 
 [Install]
 WantedBy=basic.target

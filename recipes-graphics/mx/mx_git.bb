@@ -29,10 +29,10 @@ do_configure_prepend() {
     sed -i -e 's:EXTRA_DIST +=:EXTRA_DIST =:' ${S}/docs/reference/libmx/Makefile.am
 }
 
-FILES_${PN}-dev += " \
-    /usr/share/gir-1.0 \
-    /usr/share/gir-1.0/Mx-2.0.gir \
-    ${libdir}/girepository-1.0 \
-    ${libdir}/girepository-1.0/Mx-2.0.typelib \
-"
+#FILES_${PN}-dev += " \
+#    /usr/share/gir-1.0 \
+#    /usr/share/gir-1.0/Mx-2.0.gir \
+#    ${libdir}/girepository-1.0 \
+#    ${libdir}/girepository-1.0/Mx-2.0.typelib \
+#"
 

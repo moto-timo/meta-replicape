@@ -6,13 +6,16 @@ SECTION = "devel/python"
 LICENSE = "AGPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=73f1eb20517c55bf9493b7dd6e480788"
 
-SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9"
+# Latest master
+SRCREV = "48dc27e1060393b0b4e98f25358711d73bf2b7f5" 
+#SRCREV = "b282a18f6bb09bfba86ada1a4e002cac58455ce9" # Old master
 
-SRC_URI = "git://github.com/foosel/OctoPrint.git;protocol=https\ 
+#SRCREV = "4d434d36bee94d3d5029358ef59c00e22fbfc37e" # Latest devel, not responding
+
+SRC_URI = "git://github.com/foosel/OctoPrint.git;protocol=https;branch=master\ 
            file://config.yaml \
            file://octoprint.service \
 "
-
 S = "${WORKDIR}/git"
 
 inherit setuptools
@@ -34,7 +37,7 @@ do_install_append(){
     install -d ${D}/etc/octoprint
     install -d ${D}/lib/systemd/system
     install -m 0644 ${S}/../octoprint.service ${D}${systemd_unitdir}/system
-    install -m 0774 ${S}/run ${D}${bindir}/octoprint
+    install -m 0774 ${S}/run ${D}${bindir}/octoprint.run
     install -m 0644 ${S}/../config.yaml ${D}/etc/octoprint/config.yaml
 }
 
@@ -70,5 +73,10 @@ RDEPENDS_${PN} = "python-tornado \
                   python-blinker \
                   python-netaddr \
                   python-jinja2 \
+                  python-watchdog \
+                  python-pathtools \
+                  python-sarge \
+                  python-sphinxcontrib-httpdomain \
+                  python-sphinx-rtd-theme \
 "
 

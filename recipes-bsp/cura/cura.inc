@@ -12,7 +12,6 @@ LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=73f1eb20517c55bf9493b7dd6e480788"
 
 SRC_URI = "git://github.com/Ultimaker/CuraEngine.git;protocol=https"
-SRCREV = "1ebe4315c39b1be9d56e85a95b528d9594d5b9fb"
 
 COMPATIBLE_MACHINE = "(beaglebone)"
 

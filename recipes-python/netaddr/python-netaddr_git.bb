@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e0c5cc28e66c19626bc908b3a9402c2e"
 
 SRC_URI = "git://github.com/drkjam/netaddr.git;protocol=https;branch=rel-0.7.x"
 SRCREV = "21587e22a5436935aaf887c41fba6c5e61f55276"
+SRCREV = "cdcdc75bb27cb94694641942f895b749d797bdb6"
 
 S = "${WORKDIR}/git"
 

@@ -1,16 +1,17 @@
 include cura.inc
 
-SRC_URI[md5sum] = "6b09dc8960eeb0b6a5de41d4e644bfa8"
-SRC_URI[sha256sum] = "750c9ee01dd5468dae403af1daac25862e8a5644bb412f2f6022d76e7d7f639e"
+#SRCREV = "1ebe4315c39b1be9d56e85a95b528d9594d5b9fb"
+SRCREV = "4c1043f69a5f418cf1c9d3034bdf5d670d732a00"
 
 do_compile(){
     sed -i "s:--static::g" Makefile
+    sed -i "s:-flto::g" Makefile
     make 
 }
 
 do_install_append () {
     install -d ${D}${bindir}
-    install -m 0744 ${S}/CuraEngine ${D}${bindir}
+    install -m 0744 ${S}/build/CuraEngine ${D}${bindir}
 }
     
 FILES_${PN} += " \

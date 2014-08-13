@@ -6,13 +6,13 @@ IMAGE_INSTALL += " \
     toggle \
     cura \
     octoprint \
-    replicape-device-tree \
     tty0tty \   
     python-numpy \
     ntp \
     devmem2 \
     pkgconfig \
-    gadget-init \
+    usb-gadget \
+    udhcpd \
     xkeyboard-config \
     gdk-pixbuf-loader-jpeg \
     gdk-pixbuf-loader-ico \
@@ -54,8 +54,21 @@ IMAGE_INSTALL += " \
     cogl-1.0-gir \
     clutter-1.0-gir \
     atk-gir \
+    gdk-pixbuf \
     gdk-pixbuf-gir \
+    mx-gir \
+    kernel-devicetree-overlays \
+    bash \
+    bc \
+    python-pip \
+    libtool \
 "
+#libgirepository-dev
+#    systemd-dev 
+#    mash-dev 
+#    mx-dev 
+#   clutter-1.0-dev 
+
 
 export IMAGE_BASENAME = "systemd-thing-image"
 
