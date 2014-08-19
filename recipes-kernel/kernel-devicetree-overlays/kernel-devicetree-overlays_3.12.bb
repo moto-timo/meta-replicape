@@ -10,8 +10,6 @@ SRC_URI[sha256sum] = "860ecb66c00d6da8015322f55e766e25c82a1eeeb0d6c0c9ebe9a57770
 
 S = "${WORKDIR}/git/arch/arm/boot/dts"
 
-
-
 do_compile(){
     files=`ls ${S}/*.dts | grep -e BB -e cape -e bone_ -e TT3201 -e DNIL`
     for file in $files

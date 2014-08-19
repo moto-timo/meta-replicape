@@ -5,7 +5,7 @@
 
 export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
 
-FLASHIMG="Angstrom-systemd-thing-image-eglibc-ipk-v2014.06-beaglebone.rootfs.tar.xz"
+FLASHIMG="Angstrom-systemd-debrew-image-eglibc-ipk-v2014.06-beaglebone.rootfs.tar.xz"
 PART1MOUNT="/media/1"
 PART2MOUNT="/media/2"
 
@@ -46,7 +46,7 @@ mount /dev/mmcblk1p2 ${PART2MOUNT} -o async,noatime
 
 echo "Copying bootloader files"
 cp MLO u-boot.img ${PART1MOUNT}
-echo "optargs=drm.debug=7 consoleblank=0 vt.global_cursor_default=0 mtdoops.mtddev=2" > ${PART1MOUNT}/uEnv.txt
+echo "optargs=drm.debug=7 consoleblank=0 vt.global_cursor_default=0" > ${PART1MOUNT}/uEnv.txt
 
 umount /dev/mmcblk1p1
 
@@ -62,11 +62,11 @@ if [ -d ${PART2MOUNT}/usr/share/beaglebone-getting-started ] ; then
 fi
 
 # Add ID and dogtag
-echo "Systemd Thing Image 2014.07.31" > ${PART1MOUNT}/ID.txt
-echo "Systemd Thing Image 2014.07.31" > ${PART2MOUNT}/etc/dogtag
-echo -e "NAME=Thing\nID=thing\nPRETTY_NAME=The Thing\nANSI_COLOR=1;35" > ${PART2MOUNT}/etc/os-release
+echo "Systemd Debrew Image 2014.07.31" > ${PART1MOUNT}/ID.txt
+echo "Systemd Debrew Image 2014.07.31" > ${PART2MOUNT}/etc/dogtag
+echo -e "NAME=Debrew\nID=debrew\nPRETTY_NAME=Debrew\nANSI_COLOR=1;35" > ${PART2MOUNT}/etc/os-release
 # Set hostname 
-echo "thing" > ${PART2MOUNT}/etc/hostname
+echo "debrew" > ${PART2MOUNT}/etc/hostname
 # Add thing package feeds
 echo "src/gz thing-base http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/armv7at2hf-vfp-neon/machine/beaglebone" > ${PART2MOUNT}/etc/opkg/thing-base-feed.conf
 echo "src/gz thing-beaglebone http://feeds.thing-printer.com/feeds/v2014.06/ipk/eglibc/beaglebone" > ${PART2MOUNT}/etc/opkg/thing-beaglebone-feed.conf
@@ -108,10 +108,6 @@ ln -s /dev/null ${PART2MOUNT}/etc/systemd/system/xinetd.service
 rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/getty@tty1.service
 # Mask the ttyGS0 service
 rm -f ${PART2MOUNT}/etc/systemd/system/getty.target.wants/serial-getty@ttyGS0.service
-
-# link libprussdrv.so to libprussdrv.so.1
-#cd ${PART2MOUNT}/usr/lib/
-#ln -s libprussdrv.so.1 libprussdrv.so
 
 touch ${PART2MOUNT}/etc/default/locale
 

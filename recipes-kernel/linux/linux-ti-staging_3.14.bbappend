@@ -32,11 +32,13 @@ SRC_URI += " \
     file://dtc-fixes/0002-fdtdump-properly-handle-multi-string-properties.patch \
     file://capes/0001-capemgr-firmware-makefiles-for-DT-objects.patch \
     file://pru/0001-These-are-the-patches-necessary-for-enabling-the-PRU.patch \
+    file://pru/0002-ARM-omap-add-DT-support-for-deasserting-hardware-res.patch \
+    file://pru/0003-check-for-presence-of-pdata.patch \
     file://configs/0001-enable-capemgr.cfg \
-    file://configs/0002-enable-of-resolve.cfg \
     file://configs/enable-led-gpio.cfg \
+    file://configs/enable-w1-gpio.cfg \
 "
 
-KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/configs/0001-enable-capemgr.cfg ${WORKDIR}/configs/enable-led-gpio.cfg "
+KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/configs/0001-enable-capemgr.cfg ${WORKDIR}/configs/enable-led-gpio.cfg ${WORKDIR}/configs/enable-w1-gpio.cfg"
 
 EXTRA_OEMAKE += " V=1 "

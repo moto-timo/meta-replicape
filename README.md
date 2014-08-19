@@ -7,19 +7,16 @@ Kernel:
   * 3.14 with Capemgr
 
 BSP-layer: 
-  * Redeem -- The Replicape Daemon
-  * Toggle -- GUI for 3D-printers suitable for embedded platforms. 
-  * Octoprint -- The responsive web interface for your 3D printer
-  * CuraEngine -- A fast G-code slicer 
-
-Includes:
-  * tty0tty -- a Linux null-modem emulator
+  * Redeem 0.14.2 -- The Replicape Daemon
+  * Toggle 0.2 -- GUI for 3D-printers suitable for embedded platforms. 
+  * Octoprint stable -- The responsive web interface for your 3D printer
+  * CuraEngine stable -- A fast G-code slicer 
 
 Pull requests pending (meta-beagleboard):
   * pasm -- a [PRU](http://processors.wiki.ti.com/index.php/Programmable_Realtime_Unit_Subsystem) Assembler
 
 Graphics: 
-  * Clutter 1.9.2
+  * Clutter 1.9.6
   * Cogl-1.8.2
   * Mx-2.0
   * Mash-0.2
@@ -33,8 +30,11 @@ There is no window system. (--enable-egl-null)
 Backend to clutter is evdev/libinput
 
 
+Todo: 
+ - sed capes
+ - Finish Toggle
+
 Add: 
- - libtool
  - libgirepository-1.0-dev
  - libclutter-1.0-dev
 
@@ -89,6 +89,10 @@ v2014.06:
 - Added capemgr to Kernel 3.14
 - USB gadget serial not available as /dev/ttyGS0
 - Get Python/Clutter code to compile out of the box
+ - PRU bug
+ - added Flup
+ - Added web.py
+ - Thing-frontend
 
 
 Remember (Will eventually be a part of recipes): 

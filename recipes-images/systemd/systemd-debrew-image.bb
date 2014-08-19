@@ -3,10 +3,10 @@ require recipes-images/angstrom/systemd-image.bb
 IMAGE_INSTALL += " \
     pasm \
     redeem \
-    toggle \
     cura \
     octoprint \
-    thing-frontend \
+    debrew-app \
+    debrew-frontend \
     tty0tty \   
     python-numpy \
     ntp \
@@ -71,7 +71,7 @@ IMAGE_INSTALL += " \
 #   clutter-1.0-dev 
 
 
-export IMAGE_BASENAME = "systemd-thing-image"
+export IMAGE_BASENAME = "systemd-debrew-image"
 
 
 
