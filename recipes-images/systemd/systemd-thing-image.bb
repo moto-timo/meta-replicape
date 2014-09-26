@@ -4,9 +4,14 @@ IMAGE_INSTALL += " \
     pasm \
     redeem \
     toggle \
+    libtoggle \
     cura \
+    curaengine \
+    wxpython \
     octoprint \
     thing-frontend \
+    mjpg-streamer \
+    libav \
     tty0tty \   
     python-numpy \
     ntp \
@@ -63,6 +68,12 @@ IMAGE_INSTALL += " \
     bc \
     python-pip \
     libtool \
+    parse-edid \
+    tslib \
+    autoconf \
+    automake \
+    subversion \
+    linux-firmware-rtl8192cu \
 "
 #libgirepository-dev
 #    systemd-dev 

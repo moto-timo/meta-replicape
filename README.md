@@ -4,10 +4,11 @@ meta-replicape
 Layer for [&Aring;ngstr&ouml;m](http://angstrom-distrubiton.org)/[OpenEmbedded](http://openembedded.org) to support the Replicape. Inspired by [http://www.thing-printer.com] (Replicape)
 
 Kernel:
-  * 3.14 with Capemgr
+  * 3.14 with Capemgr (requires meta-ti commit 1d4407e7f67a1a1955a7debb336020de304adc00)
+
 
 BSP-layer: 
-  * Redeem 0.14.2 -- The Replicape Daemon
+  * Redeem 0.15.2 -- The Replicape Daemon
   * Toggle 0.2 -- GUI for 3D-printers suitable for embedded platforms. 
   * Octoprint stable -- The responsive web interface for your 3D printer
   * CuraEngine stable -- A fast G-code slicer 
@@ -43,6 +44,7 @@ Todo:
 - Add task-native-sdk? 
 
 Staged: 
+ - kernel device tree overlays fixed 
 
 Wontfix:
 - USB babble interrupt occured. (added a patch, not tested) 

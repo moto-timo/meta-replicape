@@ -25,6 +25,7 @@ do_install(){
     install -d ${D}/www/pages/static/jquery-ui-1.11.0.custom/images
     install -d ${D}/etc/lighttpd.d/
     install -m 0755 ${S}/web/debrew/*.py ${D}/www/pages/debrew
+    install -m 0755 ${S}/web/debrew/debrew ${D}/www/pages/debrew/
     install -m 0644 ${S}/web/debrew/templates/*.html ${D}/www/pages/debrew/templates
     install -m 0644 ${S}/web/static/*.js ${D}/www/pages/static
     install -m 0644 ${S}/web/static/images/*.png ${D}/www/pages/static/images
@@ -36,6 +37,7 @@ do_install(){
 
 FILES_${PN} += " \
       /www/pages/debrew/*.py \
+      /www/pages/debrew/debrew \
       /www/pages/debrew/templates/*.html \
       /www/pages/static/*.js \
       /www/pages/static/images/*.png \

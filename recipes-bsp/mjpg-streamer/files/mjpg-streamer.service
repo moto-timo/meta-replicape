@@ -1,0 +1,9 @@
+[Unit]
+Description=Mjpeg streamer
+After=mjpg-streamer.path
+
+[Service]
+ExecStart=/usr/bin/mjpg_streamer -i "input_uvc.so" -o "output_http.so"
+
+[Install]
+WantedBy=multi-user.target

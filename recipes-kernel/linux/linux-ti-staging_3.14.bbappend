@@ -37,8 +37,10 @@ SRC_URI += " \
     file://configs/0001-enable-capemgr.cfg \
     file://configs/enable-led-gpio.cfg \
     file://configs/enable-w1-gpio.cfg \
+    file://configs/enable-hid.cfg \
+    file://configs/enable-rtl.cfg \
 "
 
-KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/configs/0001-enable-capemgr.cfg ${WORKDIR}/configs/enable-led-gpio.cfg ${WORKDIR}/configs/enable-w1-gpio.cfg"
+KERNEL_CONFIG_FRAGMENTS_append_ti33x = " ${WORKDIR}/configs/0001-enable-capemgr.cfg ${WORKDIR}/configs/enable-led-gpio.cfg ${WORKDIR}/configs/enable-w1-gpio.cfg  ${WORKDIR}/configs/enable-rtl.cfg"
 
 EXTRA_OEMAKE += " V=1 "

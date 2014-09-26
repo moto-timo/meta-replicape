@@ -1,4 +1,15 @@
 serial:
   additionalPorts:
   - /dev/octoprint_1
+  autoconnect: true
+  port: /dev/octoprint_1
+  timeout: {}
+cura:
+  config: /etc/cura/CuraConfig.ini
+  enabled: true
+  path: /usr/src/cura/cura.sh
+webcam:
+  ffmpeg: /usr/bin/ffmpeg
+  snapshot: thing.local:8080/?action=snapshot
+  stream: thing.local:8080/?action=stream
 

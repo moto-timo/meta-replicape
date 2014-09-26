@@ -1,0 +1,9 @@
+[Unit]
+Description=trigger for webcam path present
+
+[Path]
+PathExists=/dev/video0
+
+[Install]
+WantedBy=multi-user.target
+

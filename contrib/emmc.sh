@@ -62,8 +62,8 @@ if [ -d ${PART2MOUNT}/usr/share/beaglebone-getting-started ] ; then
 fi
 
 # Add ID and dogtag
-echo "Systemd Thing Image 2014.07.31" > ${PART1MOUNT}/ID.txt
-echo "Systemd Thing Image 2014.07.31" > ${PART2MOUNT}/etc/dogtag
+echo "Systemd Thing Image 2014.09.21" > ${PART1MOUNT}/ID.txt
+echo "Systemd Thing Image 2014.09.21" > ${PART2MOUNT}/etc/dogtag
 echo -e "NAME=Thing\nID=thing\nPRETTY_NAME=The Thing\nANSI_COLOR=1;35" > ${PART2MOUNT}/etc/os-release
 # Set hostname 
 echo "thing" > ${PART2MOUNT}/etc/hostname
